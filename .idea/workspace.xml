@@ -19,29 +19,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0586a57-d3b4-4e96-9db6-d8edca86224c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Repositories/BaseRepositoryInterface.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repositories/Events/EventRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repositories/Events/EventRepositoryInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EventController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EventController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-    </list>
+    <list default="true" id="f0586a57-d3b4-4e96-9db6-d8edca86224c" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="PackageJsonUpdateNotifier">
-    <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -168,7 +154,6 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
@@ -186,9 +171,6 @@
       <option name="presentableId" value="Default" />
       <updated>1602189255022</updated>
       <workItem from="1602189256083" duration="1928000" />
-      <workItem from="1603332821673" duration="1468000" />
-      <workItem from="1603589906499" duration="4416000" />
-      <workItem from="1603594635181" duration="2220000" />
     </task>
     <servers />
   </component>
@@ -196,51 +178,20 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="809" y="186" key="#com.intellij.ide.util.MemberChooser" timestamp="1603592583212">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="809" y="186" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1360.117.1360.728@0.0.1920.1040" timestamp="1603333037297" />
-    <state x="809" y="186" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1603592583212" />
-    <state x="754" y="294" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1603590737158">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="754" y="294" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1603590737158" />
     <state x="709" y="28" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1602230587815">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="709" y="28" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1602230587815" />
-    <state x="801" y="227" key="NewPhpClassDialog" timestamp="1603590757436">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="801" y="227" key="NewPhpClassDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1603590757436" />
-    <state x="838" y="428" key="NewPhpFileDialog" timestamp="1603590035400">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="838" y="428" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1603590035400" />
-    <state x="725" y="249" width="570" height="524" key="StructurePopup" timestamp="1603592572001">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="725" y="249" width="570" height="524" key="StructurePopup/0.0.1920.1040/-1360.117.1360.728@0.0.1920.1040" timestamp="1603333064076" />
-    <state x="725" y="249" width="570" height="524" key="StructurePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1603592572001" />
     <state x="711" y="237" width="585" height="534" key="find.popup" timestamp="1602230724304">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="711" y="237" width="585" height="534" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1602230724304" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1603596368485">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1602189835722">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1603596368485" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1602189835722" />
   </component>
 </project>
