@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\EventRequest;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class EventController extends Controller
 {
@@ -17,7 +18,17 @@ class EventController extends Controller
      */
     public function store(EventRequest $request)
     {
-        return response()->json('Evento guardado con éxito',201);
+        Event::create($request->all());
+        return response()->json('Guardado exitoso',200);
+    }
+
+    /**
+     * Obtiene la lista de eventos
+     * @return Illuminate\Http\Response
+     */
+    public function getEvents(){
+        $response = Event::all();
+        return response()->json($response, 200);
     }
 
     /**

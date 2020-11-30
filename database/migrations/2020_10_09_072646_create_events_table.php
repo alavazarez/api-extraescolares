@@ -15,16 +15,13 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('type_event_id');
             $table->string('name');
-            $table->string('type');
-            $table->date('date');
-            $table->time('time');
+            $table->string('organizer',50);
+            $table->string('description');
+            $table->dateTime('date');
             $table->string('place');
             $table->timestamps();
-
-            $table->foreign('type')
-            ->references('name')
-            ->on('type_events');
         });
     }
 

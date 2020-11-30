@@ -8,10 +8,11 @@ class Event extends Model
 {
     protected $fillable = [
         'name', 
-        'type', 
+        'type_event_id', 
+        'description',
         'date',
-        'time',
-        'Place',
+        'place',
+        'organizer',
     ];
 
     public function typeEvents()

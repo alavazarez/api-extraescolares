@@ -24,11 +24,12 @@ class EventRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'       => 'required|max:55',
-            'description' => 'required|max:255',
-            'time'        => 'required|date',
+            'name'       => 'required|max:55',
+            'description' => 'max:255',
+            'type_event_id' => 'required|integer',
+            'date'        => 'required|date',
             'place'       => 'required|max:55',
-            'Organizer'   => 'required|max:55',
+            'organizer'   => 'max:50',
         ];
     }
 }
