@@ -60,8 +60,9 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Event $event)
+    public function destroy(Event $event, Request $request)
     {
-        //
+        $res = $event::destroy($request->id);
+        return response()->json($res,200);
     }
 }

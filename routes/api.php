@@ -24,5 +24,6 @@ Route::middleware('auth:sanctum')
 Route::middleware('auth:sanctum')
     ->post('/evento/store', 'EventController@store');
 
-
+Route::middleware('auth:sanctum')
+    ->post('/evento/destroy', 'EventController@destroy');
 
