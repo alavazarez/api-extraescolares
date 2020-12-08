@@ -49,9 +49,20 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Event $event)
+    public function update(Request $request, $id)
     {
-        //
+        /*$event = Event::find($id);
+
+        $event->name = $request->name;
+        $event->type_event_id = $request->type_event_id;
+        $event->organizer = $request->organizer;
+        $event->date = $request->date;
+        $event->place = $request->place;
+        $event->description = $request->description;
+        $event->save();
+
+        return response()->json($res,200);*/
+
     }
 
     /**
