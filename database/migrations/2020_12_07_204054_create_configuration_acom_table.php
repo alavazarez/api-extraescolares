@@ -18,7 +18,7 @@ class CreateConfigurationAcomTable extends Migration
             $table->string('nameBossDAE');
             $table->string('nameCoordinator');
             $table->string('nameBossDSE');
-            $table->dateTime('slogan');
+            $table->string('slogan');
             $table->timestamps();
         });
     }
