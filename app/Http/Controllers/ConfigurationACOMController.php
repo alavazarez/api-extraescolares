@@ -12,4 +12,17 @@ class ConfigurationAcomController extends Controller
         $response = ConfigurationAcom::first();
         return response()->json($response, 200);
     }
+
+    public function update(Request $request, $id)
+    {
+        $acom = ConfigurationAcom::find($id);
+        
+        $acom->nameBossDAE = $request->nameBossDAE;
+        $acom->nameCoordinator = $request->nameCoordinator;
+        $acom->nameBossDSE = $request->nameBossDSE;
+        $acom->slogan = $request->slogan;
+        $acom->save();
+
+        return response()->json(true);   
+    }
 }

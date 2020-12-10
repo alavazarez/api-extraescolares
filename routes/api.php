@@ -33,4 +33,7 @@ Route::middleware('auth:sanctum')
 Route::middleware('auth:sanctum')
     ->get('/acom/configuration', 'ConfigurationAcomController@getAcomData');
 
+Route::middleware('auth:sanctum')
+    ->post('/acom/configuration/{id}', 'ConfigurationAcomController@update');
+
 
