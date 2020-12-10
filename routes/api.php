@@ -30,5 +30,8 @@ Route::middleware('auth:sanctum')
 Route::middleware('auth:sanctum')
     ->post('/evento/destroy', 'EventController@destroy');
 
+Route::middleware('auth:sanctum')
+    ->get('/alumnos', 'AlumnoController@getAlumnos');
 
-
+Route::middleware('auth:sanctum')
+    ->get('/alumno/{matricula}', 'AlumnoController@find');
