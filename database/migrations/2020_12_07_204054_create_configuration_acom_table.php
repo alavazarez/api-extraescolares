@@ -13,7 +13,7 @@ class CreateConfigurationAcomTable extends Migration
      */
     public function up()
     {
-        Schema::create('configuration_acom', function (Blueprint $table) {
+        Schema::create('configuration_acoms', function (Blueprint $table) {
             $table->id();
             $table->string('nameBossDAE');
             $table->string('nameCoordinator');

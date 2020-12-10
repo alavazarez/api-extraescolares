@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ConfigurationACOM extends Model
+class ConfigurationAcom extends Model
 {
     protected $fillable = [
         'nameBossDAE', 

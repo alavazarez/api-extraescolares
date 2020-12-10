@@ -24,11 +24,13 @@ Route::middleware('auth:sanctum')
 Route::middleware('auth:sanctum')
     ->post('/evento/store', 'EventController@store');
 
-/*Route::middleware('auth:sanctum')
-    ->post('/evento/edit/{id}', 'EventController@update');*/
+Route::middleware('auth:sanctum')
+    ->post('/evento/edit/{id}', 'EventController@update');
 
 Route::middleware('auth:sanctum')
     ->post('/evento/destroy', 'EventController@destroy');
 
+Route::middleware('auth:sanctum')
+    ->get('/acom/configuration', 'ConfigurationAcomController@getAcomData');
 
 

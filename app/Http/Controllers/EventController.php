@@ -51,7 +51,7 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        /*$event = Event::find($id);
+        $event = Event::find($id);
 
         $event->name = $request->name;
         $event->type_event_id = $request->type_event_id;
@@ -61,8 +61,7 @@ class EventController extends Controller
         $event->description = $request->description;
         $event->save();
 
-        return response()->json($res,200);*/
-
+        return response()->json($res,200);
     }
 
     /**
