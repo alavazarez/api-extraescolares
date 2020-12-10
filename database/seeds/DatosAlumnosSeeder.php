@@ -20,6 +20,7 @@ class DatosAlumnosSeeder extends Seeder
             'Carrera' => 'Ingenieria Mecanica',
             'Semestre' => 9,
             'Actividad' => 'Futbol', 
+            'Status' => 'Acreditado',
           ]);
   
           //guardar 20 registros
@@ -31,6 +32,7 @@ class DatosAlumnosSeeder extends Seeder
                 'Carrera' => Str::random(20),
                 'Semestre' => rand(1, 12),
                 'Actividad' => Str::random(10),
+                'Status' => Str::random(10),
             ]);
           }
     }

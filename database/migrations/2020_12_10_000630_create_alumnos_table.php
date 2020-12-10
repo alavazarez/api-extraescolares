@@ -20,6 +20,7 @@ class CreateAlumnosTable extends Migration
             $table->string('Carrera');
             $table->integer('Semestre');
             $table->string('Actividad');
+            $table->string('Status');
             $table->timestamps();
         });
     }
