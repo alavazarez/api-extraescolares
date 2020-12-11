@@ -61,7 +61,7 @@ class EventController extends Controller
         $event->description = $request->description;
         $event->save();
 
-        return response()->json($res,200);
+        return response()->json($event,200);
     }
 
     /**
