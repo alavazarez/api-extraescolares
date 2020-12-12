@@ -4,12 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Alumno extends Model
+class TypeAcom extends Model
 {
     public function acoms()
     {
-        return $this->belongsTo('App\Models\Acom');
+        return $this->hasMany('App\Models\Acom');
     }
 }
-
-

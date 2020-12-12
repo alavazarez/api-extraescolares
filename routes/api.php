@@ -41,3 +41,6 @@ Route::middleware('auth:sanctum')
 
 Route::middleware('auth:sanctum')
     ->get('/alumno/{matricula}', 'AlumnoController@find');
+
+Route::middleware('auth:sanctum')
+    ->post('/acom/store', 'AcomController@store');
