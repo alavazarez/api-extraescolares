@@ -13,7 +13,7 @@ class AlumnoController extends Controller
     }
 
     public function find($matricula){
-        $alumno = Alumno::where('matricula',$matricula)->get();
-        return response()->json($alumno);
+        $alumno = Alumno::where('matricula',$matricula)->firstOrFail();
+        return response()->json($alumno,200);
     }
 }
