@@ -36,4 +36,8 @@ Route::middleware('auth:sanctum')
 Route::middleware('auth:sanctum')
     ->post('/acom/configuration/{id}', 'ConfigurationAcomController@update');
 
+Route::middleware('auth:sanctum')
+    ->get('/alumnos', 'AlumnoController@getAlumnos');
 
+Route::middleware('auth:sanctum')
+    ->get('/alumno/{matricula}', 'AlumnoController@find');
