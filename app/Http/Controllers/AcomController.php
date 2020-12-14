@@ -12,4 +12,10 @@ class AcomController extends Controller
         Acom::create($request->all());
         return response()->json('Guardado exitoso',200);
     }
+
+    public function getAcoms()
+    {
+        $response = Acom::with('alumnos')->orderBy('id')->get();
+        return response()->json($response, 200);
+    }
 }

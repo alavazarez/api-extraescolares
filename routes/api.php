@@ -44,3 +44,6 @@ Route::middleware('auth:sanctum')
 
 Route::middleware('auth:sanctum')
     ->post('/acom/store', 'AcomController@store');
+
+Route::middleware('auth:sanctum')
+    ->get('/acom/index', 'AcomController@getAcoms');
