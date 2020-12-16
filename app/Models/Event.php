@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
+    protected $table = 'events';
+    
     protected $fillable = [
         'name', 
         'type_event_id', 
@@ -18,5 +20,10 @@ class Event extends Model
     public function typeEvents()
     {
         return $this->belongsTo('App\Models\TypeEvent');
+    }
+
+    public function alumnos()
+    {
+        return $this->belongsToMany('App\Models\Alumno')->withTimestamps();
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAcomsTable extends Migration
+class CreateAlumnoEventTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,19 @@ class CreateAcomsTable extends Migration
      */
     public function up()
     {
-        Schema::create('acoms', function (Blueprint $table) {
+        Schema::create('alumno_event', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('alumno_id');
-            $table->unsignedBigInteger('typeAcom_id');
-            $table->dateTime('dateDelivery')->nullable();
-            $table->string('description');
-            $table->integer('status');
+            $table->unsignedBigInteger('event_id');
             $table->timestamps();
 
             $table->foreign('alumno_id')
             ->references('id')
             ->on('alumnos');
 
-            $table->foreign('typeAcom_id')
+            $table->foreign('event_id')
             ->references('id')
-            ->on('type_acoms');
+            ->on('events');
         });
     }
 
@@ -39,6 +36,6 @@ class CreateAcomsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('acoms');
+        Schema::dropIfExists('alumno_event');
     }
 }

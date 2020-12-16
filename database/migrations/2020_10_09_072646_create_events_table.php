@@ -15,13 +15,17 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('type_event_id');
+            $table->unsignedBigInteger('type_event_id');
             $table->string('name');
             $table->string('organizer',50);
             $table->string('description');
             $table->dateTime('date');
             $table->string('place');
             $table->timestamps();
+
+            $table->foreign('type_event_id')
+            ->references('id')
+            ->on('type_events');
         });
     }
 

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Alumno extends Model
 {
+    protected $table = 'alumnos';
+
     protected $fillable = [
         'name', 
         'matricula', 
@@ -18,6 +20,11 @@ class Alumno extends Model
     public function acoms()
     {
         return $this->belongsTo('App\Models\Acom');
+    }
+
+    public function events()
+    {
+        return $this->belongsToMany(Event::class,'alumno_event', 'alumno_id', 'event_id')->withTimestamps();
     }
 }
 
