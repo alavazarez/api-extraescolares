@@ -24,7 +24,7 @@ class Alumno extends Model
 
     public function events()
     {
-        return $this->belongsToMany(Event::class,'alumno_event', 'alumno_id', 'event_id')->withTimestamps();
+        return $this->belongsToMany(Event::class)->withTimestamps();
     }
 }
 
