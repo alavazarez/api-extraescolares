@@ -43,7 +43,13 @@ Route::middleware('auth:sanctum')
     ->get('/alumno/{matricula}', 'AlumnoController@find');
 
 Route::middleware('auth:sanctum')
+    ->get('/alumno/count/{matricula}', 'AlumnoController@getEventsDeportivos');
+
+Route::middleware('auth:sanctum')
     ->post('/acom/store', 'AcomController@store');
 
 Route::middleware('auth:sanctum')
     ->get('/acom/index', 'AcomController@getAcoms');
+
+Route::middleware('auth:sanctum')
+    ->get('/event/reports/exportExcel', 'AlumnoController@exportExcel');
