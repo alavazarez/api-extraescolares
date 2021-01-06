@@ -53,3 +53,6 @@ Route::middleware('auth:sanctum')
 
 Route::middleware('auth:sanctum')
     ->get('/event/reports/exportExcel', 'AlumnoController@exportExcel');
+
+Route::middleware('auth:sanctum')
+    ->get('/event/reports/exportExcelEvents/{date}', 'EventController@getEventsforDate');

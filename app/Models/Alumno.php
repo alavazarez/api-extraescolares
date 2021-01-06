@@ -26,6 +26,21 @@ class Alumno extends Model
     {
         return $this->belongsToMany(Event::class)->withTimestamps();
     }
+
+    public function getCountDeportivoAttribute($matricula)
+    {
+        return Alumno::select('alumnos.matricula','events.type_event_id')->join('alumno_event','alumnos.id','=','alumno_event.alumno_id')->where('matricula',$matricula)->join('events','alumno_event.event_id','=','events.id')->where('type_event_id',1)->count();
+    }
+
+    public function getCountCulturalAttribute($matricula)
+    {
+        return Alumno::select('alumnos.matricula','events.type_event_id')->join('alumno_event','alumnos.id','=','alumno_event.alumno_id')->where('matricula',$matricula)->join('events','alumno_event.event_id','=','events.id')->where('type_event_id',2)->count();
+    }
+
+    public function getCountCivicoAttribute($matricula)
+    {
+        return Alumno::select('alumnos.matricula','events.type_event_id')->join('alumno_event','alumnos.id','=','alumno_event.alumno_id')->where('matricula',$matricula)->join('events','alumno_event.event_id','=','events.id')->where('type_event_id',3)->count();
+    }
 }
 
 

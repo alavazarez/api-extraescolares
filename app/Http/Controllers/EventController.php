@@ -53,7 +53,7 @@ class EventController extends Controller
     {
         $event = Event::find($id);
 
-        $event->name = $request->name;
+        $event->nameEvent = $request->nameEvent;
         $event->type_event_id = $request->type_event_id;
         $event->organizer = $request->organizer;
         $event->date = $request->date;
@@ -74,5 +74,11 @@ class EventController extends Controller
     {
         $res = $event::destroy($request->id);
         return response()->json($res,200);
+    }
+
+    public function getEventsforDate($date)
+    {
+        $events = Event::select('events.id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description')->join('type_events', 'type_event_id', '=', 'type_events.id')->where('date',$date)->get();
+        return response()->json($events,200);
     }
 }
