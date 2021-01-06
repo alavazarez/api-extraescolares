@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EventRequest;
+use App\Http\Requests\StoreAttendanceRequest;
 use App\Models\Event;
+use App\Models\Alumno;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 
@@ -74,5 +76,19 @@ class EventController extends Controller
     {
         $res = $event::destroy($request->id);
         return response()->json($res,200);
+    }
+
+    /**
+     * Registrar la asistencia de un alumno al evento
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeAttendance (Request $request)
+    {
+        foreach ($request->alumnos as $item) {
+            $alumno = Alumno::findOrFail($item['id']);
+            $alumno->events()->attach($request->event_id);
+        }
+        return response()->json(true); 
     }
 }

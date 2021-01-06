@@ -31,6 +31,9 @@ Route::middleware('auth:sanctum')
     ->post('/evento/destroy', 'EventController@destroy');
 
 Route::middleware('auth:sanctum')
+    ->post('/evento/asistencia', 'EventController@storeAttendance');
+
+Route::middleware('auth:sanctum')
     ->get('/acom/configuration', 'ConfigurationAcomController@getAcomData');
 
 Route::middleware('auth:sanctum')
@@ -47,3 +50,4 @@ Route::middleware('auth:sanctum')
 
 Route::middleware('auth:sanctum')
     ->get('/acom/index', 'AcomController@getAcoms');
+
