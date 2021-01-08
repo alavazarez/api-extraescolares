@@ -56,3 +56,9 @@ Route::middleware('auth:sanctum')
 
 Route::middleware('auth:sanctum')
     ->get('/event/reports/exportExcelEvents/{date}', 'EventController@getEventsforDate');
+
+Route::middleware('auth:sanctum')
+    ->get('/event/reports/exportExcelPeriodEvents/{initialDate}/{finalDate}', 'EventController@getEventsforPeriod');
+
+Route::middleware('auth:sanctum')
+    ->post('/acom/deliver/{id}', 'AcomController@deliverAcom');
