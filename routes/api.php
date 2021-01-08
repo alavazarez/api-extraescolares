@@ -46,7 +46,7 @@ Route::middleware('auth:sanctum')
     ->get('/alumno/count/{matricula}', 'AlumnoController@getEventsDeportivos');
 
 Route::middleware('auth:sanctum')
-    ->post('/acom/store', 'AcomController@store');
+    ->post('/acom/store/{id}', 'AcomController@store');
 
 Route::middleware('auth:sanctum')
     ->get('/acom/index', 'AcomController@getAcoms');
@@ -62,3 +62,9 @@ Route::middleware('auth:sanctum')
 
 Route::middleware('auth:sanctum')
     ->post('/acom/deliver/{id}', 'AcomController@deliverAcom');
+
+Route::middleware('auth:sanctum')
+    ->get('/acom/reports/exportarAcomLiberados/{initialDate}/{finalDate}', 'AcomController@exportarAcomLiberados');
+
+Route::middleware('auth:sanctum')
+    ->get('/acom/reports/exportarAcomsPendientes', 'AcomController@exportarAcomsPendientes');
