@@ -25,8 +25,8 @@ class AlumnoController extends Controller
         return response()->json($deportivo,200);
     }
 
-    public function exportExcel(){
-        $prueba = Alumno::select('alumnos.name' ,'alumnos.matricula', 'alumnos.carrera', 'alumnos.semestre')->join('alumno_event','alumnos.id','=','alumno_event.alumno_id')->join('events','alumno_event.event_id','=','events.id')->where('events.id',1)->get();
+    public function exportExcel($id){
+        $prueba = Alumno::select('alumnos.name' ,'alumnos.matricula', 'alumnos.carrera', 'alumnos.semestre')->join('alumno_event','alumnos.id','=','alumno_event.alumno_id')->join('events','alumno_event.event_id','=','events.id')->where('events.id', $id)->get();
         return response()->json($prueba,200);
     }
 }

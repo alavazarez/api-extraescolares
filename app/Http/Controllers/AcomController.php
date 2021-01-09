@@ -39,13 +39,13 @@ class AcomController extends Controller
 
     public function exportarAcomLiberados($initialDate, $finalDate)
     {
-        $acom = Acom::select('acoms.id', 'alumnos.name', 'alumnos.matricula','alumnos.carrera', 'alumnos.semestre', 'alumnos.actividad', 'acoms.typeAcom_id', 'acoms.dateDelivery', 'acoms.description')->join('alumnos','acoms.alumno_id','=','alumnos.id')->whereBetween('dateDelivery', [$initialDate, $finalDate])->get();
+        $acom = Acom::select('acoms.id', 'alumnos.name', 'alumnos.matricula','alumnos.carrera', 'alumnos.semestre', 'alumnos.actividad', 'type_acoms.type', 'acoms.dateDelivery', 'acoms.description')->join('alumnos','acoms.alumno_id','=','alumnos.id')->join('type_acoms', 'acoms.typeAcom_id','=','type_acoms.id')->whereBetween('dateDelivery', [$initialDate, $finalDate])->get();
         return response()->json($acom,200);
     }
 
     public function exportarAcomsPendientes()
     {
-        $acom = Acom::select('acoms.id', 'alumnos.name', 'alumnos.matricula','alumnos.carrera', 'alumnos.semestre', 'alumnos.actividad', 'acoms.typeAcom_id', 'acoms.dateDelivery', 'acoms.description')->join('alumnos','acoms.alumno_id','=','alumnos.id')->where('dateDelivery', null)->get();
+        $acom = Acom::select('acoms.id', 'alumnos.name', 'alumnos.matricula','alumnos.carrera', 'alumnos.semestre', 'alumnos.actividad', 'type_acoms.type', 'acoms.dateDelivery', 'acoms.description')->join('alumnos','acoms.alumno_id','=','alumnos.id')->join('type_acoms', 'acoms.typeAcom_id','=','type_acoms.id')->where('dateDelivery', null)->get();
         return response()->json($acom,200);
     }
 }

@@ -87,13 +87,15 @@ class EventController extends Controller
 
     public function getEventsforDate($date)
     {
-        $events = Event::select('events.id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description')->join('type_events', 'type_event_id', '=', 'type_events.id')->where('date',$date)->get();
+        $horainicial = $date.' 00:00:00';
+        $horafinal = $date.' 23:59:59';
+        $events = Event::select('events.id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description')->join('type_events', 'type_event_id', '=', 'type_events.id')->whereBetween('date', [$horainicial, $horafinal])->get();
         return response()->json($events,200);
     }
 
     public function getEventsforPeriod($initialDate, $finalDate)
     {
-        $events = Event::whereBetween('date', [$initialDate, $finalDate])->get();;
+        $events = Event::whereBetween('date', [$initialDate, $finalDate])->get();
         return response()->json($events,200);
     }
 }

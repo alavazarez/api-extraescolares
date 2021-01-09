@@ -52,7 +52,7 @@ Route::middleware('auth:sanctum')
     ->get('/acom/index', 'AcomController@getAcoms');
 
 Route::middleware('auth:sanctum')
-    ->get('/event/reports/exportExcel', 'AlumnoController@exportExcel');
+    ->get('/event/reports/exportExcel/{id}', 'AlumnoController@exportExcel');
 
 Route::middleware('auth:sanctum')
     ->get('/event/reports/exportExcelEvents/{date}', 'EventController@getEventsforDate');
@@ -71,3 +71,6 @@ Route::middleware('auth:sanctum')
 
 Route::middleware('auth:sanctum')
     ->get('/eventoForStudents', 'EventController@getEventsForStudents');
+
+Route::middleware('auth:sanctum')
+    ->get('/eventForDate/{date}', 'EventController@getEventsforDate');
