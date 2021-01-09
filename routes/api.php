@@ -68,3 +68,6 @@ Route::middleware('auth:sanctum')
 
 Route::middleware('auth:sanctum')
     ->get('/acom/reports/exportarAcomsPendientes', 'AcomController@exportarAcomsPendientes');
+
+Route::middleware('auth:sanctum')
+    ->get('/eventoForStudents', 'EventController@getEventsForStudents');

@@ -24,7 +24,7 @@ class AcomController extends Controller
 
     public function getAcoms()
     {
-        $response = Acom::with('alumnos')->orderBy('id')->get();
+        $response = Acom::select('acoms.id', 'alumnos.matricula', 'alumnos.name', 'alumnos.carrera', 'alumnos.semestre', 'type_Acoms.type', 'acoms.dateDelivery', 'acoms.description', 'acoms.status')->join('alumnos','acoms.alumno_id','=','alumnos.id')->join('type_Acoms','acoms.typeAcom_id','=','type_Acoms.id')->get();
         return response()->json($response, 200);
     }
 

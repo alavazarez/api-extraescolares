@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EventRequest;
 use App\Models\Event;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 
@@ -27,7 +28,15 @@ class EventController extends Controller
      * @return Illuminate\Http\Response
      */
     public function getEvents(){
-        $response = Event::all();
+        //$response = Event::all();
+        $response = Event::select('events.id','events.type_event_id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description')->join('type_events', 'events.type_event_id','=','type_events.id')->get();
+        return response()->json($response, 200);
+    }
+
+    public function getEventsForStudents(){
+        $date = Carbon::now();
+        $date->format('Y-m-d H:i:s');
+        $response = Event::select('events.id','events.type_event_id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description')->join('type_events', 'events.type_event_id','=','type_events.id')->where('events.date','>=', $date)->get();
         return response()->json($response, 200);
     }
 
