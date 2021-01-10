@@ -46,8 +46,37 @@ Route::middleware('auth:sanctum')
     ->get('/alumno/{matricula}', 'AlumnoController@find');
 
 Route::middleware('auth:sanctum')
-    ->post('/acom/store', 'AcomController@store');
+    ->get('/alumno/count/{matricula}', 'AlumnoController@getEventsDeportivos');
 
 Route::middleware('auth:sanctum')
     ->get('/acom/index', 'AcomController@getAcoms');
 
+Route::middleware('auth:sanctum')
+    ->post('/acom/store/{id}', 'AcomController@store');
+
+Route::middleware('auth:sanctum')
+    ->get('/acom/index', 'AcomController@getAcoms');
+
+Route::middleware('auth:sanctum')
+    ->get('/event/reports/exportExcel/{id}', 'AlumnoController@exportExcel');
+
+Route::middleware('auth:sanctum')
+    ->get('/event/reports/exportExcelEvents/{date}', 'EventController@getEventsforDate');
+
+Route::middleware('auth:sanctum')
+    ->get('/event/reports/exportExcelPeriodEvents/{initialDate}/{finalDate}', 'EventController@getEventsforPeriod');
+
+Route::middleware('auth:sanctum')
+    ->post('/acom/deliver/{id}', 'AcomController@deliverAcom');
+
+Route::middleware('auth:sanctum')
+    ->get('/acom/reports/exportarAcomLiberados/{initialDate}/{finalDate}', 'AcomController@exportarAcomLiberados');
+
+Route::middleware('auth:sanctum')
+    ->get('/acom/reports/exportarAcomsPendientes', 'AcomController@exportarAcomsPendientes');
+
+Route::middleware('auth:sanctum')
+    ->get('/eventoForStudents', 'EventController@getEventsForStudents');
+
+Route::middleware('auth:sanctum')
+    ->get('/eventForDate/{date}', 'EventController@getEventsforDate');

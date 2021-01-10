@@ -24,7 +24,7 @@ class EventRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'       => 'required|max:55',
+            'nameEvent'       => 'required|max:55',
             'description' => 'max:255',
             'type_event_id' => 'required|integer',
             'date'        => 'required|date',
