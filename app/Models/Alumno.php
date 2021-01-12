@@ -41,6 +41,8 @@ class Alumno extends Model
     {
         return Alumno::select('alumnos.matricula','events.type_event_id')->join('alumno_event','alumnos.id','=','alumno_event.alumno_id')->where('matricula',$matricula)->join('events','alumno_event.event_id','=','events.id')->where('type_event_id',3)->count();
     }
+
+   
 }
 
 

@@ -97,6 +97,8 @@ class EventController extends Controller
         foreach ($request->alumnos as $item) {
             $alumno = Alumno::findOrFail($item['id']);
             $alumno->events()->attach($request->event_id);
+            /* Ver si el alumno ya cuenta con todas las asistencias a eventos */
+
         }
         return response()->json(true); 
     }
@@ -112,5 +114,9 @@ class EventController extends Controller
     {
         $events = Event::whereBetween('date', [$initialDate, $finalDate])->get();
         return response()->json($events,200);
+    }
+
+    public function isAsistenciaCompletada($alumno_id){
+        
     }
 }

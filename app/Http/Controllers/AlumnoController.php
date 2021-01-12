@@ -20,11 +20,6 @@ class AlumnoController extends Controller
         return response()->json($alumno,200);
     }
 
-    public function getEventsDeportivos($matricula){
-        $deportivo = Alumno::select('alumnos.matricula','events.type_event_id')->join('alumno_event','alumnos.id','=','alumno_event.alumno_id')->where('matricula',$matricula)->join('events','alumno_event.event_id','=','events.id')->where('type_event_id',1)->count();
-        return response()->json($deportivo,200);
-    }
-
     public function exportExcel($id){
         $prueba = Alumno::select('alumnos.name' ,'alumnos.matricula', 'alumnos.carrera', 'alumnos.semestre')->join('alumno_event','alumnos.id','=','alumno_event.alumno_id')->join('events','alumno_event.event_id','=','events.id')->where('events.id', $id)->get();
         return response()->json($prueba,200);
