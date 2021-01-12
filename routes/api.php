@@ -80,3 +80,9 @@ Route::middleware('auth:sanctum')
 
 Route::middleware('auth:sanctum')
     ->get('/eventForDate/{date}', 'EventController@getEventsforDate');
+
+Route::middleware('auth:sanctum')
+    ->get('/alumnoEvent/{idAlumno}/{idEvento}', 'EventController@validateAlumnoEvent');
+
+Route::middleware('auth:sanctum')
+    ->get('/event/filtrosEventos/{idFiltro}', 'EventController@filtrosEventos');
