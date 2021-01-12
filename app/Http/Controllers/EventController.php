@@ -97,8 +97,10 @@ class EventController extends Controller
         foreach ($request->alumnos as $item) {
             $alumno = Alumno::findOrFail($item['id']);
             $alumno->events()->attach($request->event_id);
+            
             /* Ver si el alumno ya cuenta con todas las asistencias a eventos */
-
+            $res = $this->isAsistenciaCompletada($alumno);
+            return response()->json($res);
         }
         return response()->json(true); 
     }
@@ -116,7 +118,20 @@ class EventController extends Controller
         return response()->json($events,200);
     }
 
-    public function isAsistenciaCompletada($alumno_id){
-        
+    public function isAsistenciaCompletada($alumno){
+        $completado = false;
+        $deportivos = $alumno
+            ->events()
+            ->eventosDeportivos();
+        $culturales = $alumno
+            ->events()
+            ->eventosCulturales();
+        $civicos = $alumno
+            ->events()
+            ->eventosCivicos();
+        if ($deportivos == 3 && $culturales == 3 && $civicos == 2) {
+            $completado = true;
+        }
+        return $completado;
     }
 }

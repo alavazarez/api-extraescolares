@@ -19,15 +19,12 @@ class Event extends Model
 
     public function typeEvents()
     {
-        return $this->belongsTo('App\Models\TypeEvent');
+        return $this->belongsTo('App\Models\TypeEvent','type_event_id', 'id');
     }
 
-    public function scopeNombreEvento($query, $nombre) {
-        return $query->where('nameEvent',$nombre);
-    }
 
     public function scopeEventosDeportivos ($query){
-        $num = $query->where('type_event_id', 1)->count();
+        return $query->where('type_event_id', 1)->count();
     }
 
     public function scopeEventosCulturales ($query){
