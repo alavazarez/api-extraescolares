@@ -86,3 +86,6 @@ Route::middleware('auth:sanctum')
 
 Route::middleware('auth:sanctum')
     ->get('/event/filtrosEventos/{idFiltro}', 'EventController@filtrosEventos');
+
+Route::middleware('auth:sanctum')
+    ->get('/acom/filtrosAcoms/{idFiltro}', 'AcomController@filtrosAcoms');

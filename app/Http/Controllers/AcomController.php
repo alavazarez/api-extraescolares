@@ -13,12 +13,12 @@ class AcomController extends Controller
         $acom = Acom::where('alumno_id',$id)->count();
         if($acom > 0)
         {
-            return response()->json('Ya se genero su ACOM',200);
+            return response()->json(false,200);
         }
         else
         {
             Acom::create($request->all());
-            return response()->json('Guardado exitoso',200);
+            return response()->json(true,200);
         }
     }
 
@@ -47,5 +47,22 @@ class AcomController extends Controller
     {
         $acom = Acom::select('acoms.id', 'alumnos.name', 'alumnos.matricula','alumnos.carrera', 'alumnos.semestre', 'alumnos.actividad', 'type_acoms.type', 'acoms.dateDelivery', 'acoms.description')->join('alumnos','acoms.alumno_id','=','alumnos.id')->join('type_acoms', 'acoms.typeAcom_id','=','type_acoms.id')->where('dateDelivery', null)->get();
         return response()->json($acom,200);
+    }
+    public function filtrosAcoms($id){
+        if($id == 0)
+        {
+            $response = Acom::select('acoms.id', 'alumnos.matricula', 'alumnos.name', 'alumnos.carrera', 'alumnos.semestre', 'type_Acoms.type', 'acoms.dateDelivery', 'acoms.description', 'acoms.status')->join('alumnos','acoms.alumno_id','=','alumnos.id')->join('type_Acoms','acoms.typeAcom_id','=','type_Acoms.id')->get();
+            return response()->json($response, 200);
+        }
+        if($id == 1)
+        {
+            $response = Acom::select('acoms.id', 'alumnos.matricula', 'alumnos.name', 'alumnos.carrera', 'alumnos.semestre', 'type_Acoms.type', 'acoms.dateDelivery', 'acoms.description', 'acoms.status')->join('alumnos','acoms.alumno_id','=','alumnos.id')->join('type_Acoms','acoms.typeAcom_id','=','type_Acoms.id')->where('acoms.dateDelivery','!=', null)->get();
+            return response()->json($response, 200);
+        }
+        if($id == 2)
+        {
+            $response = Acom::select('acoms.id', 'alumnos.matricula', 'alumnos.name', 'alumnos.carrera', 'alumnos.semestre', 'type_Acoms.type', 'acoms.dateDelivery', 'acoms.description', 'acoms.status')->join('alumnos','acoms.alumno_id','=','alumnos.id')->join('type_Acoms','acoms.typeAcom_id','=','type_Acoms.id')->where('acoms.dateDelivery','=', null)->get();
+            return response()->json($response, 200);
+        }
     }
 }
