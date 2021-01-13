@@ -35,6 +35,18 @@ class Event extends Model
         return $query->where('type_event_id', 3)->count();
     }
 
+    public function scopeAsistenciaCompletada($query, $events){
+        foreach ($events as $event)
+        {
+            $asistencias = $query->where('type_event_id', $event['id'])
+                 ->count(); 
+
+            if( $asistencias < $event['numero_asistencias'] )
+                return false;
+        }
+        return true;
+    }
+
     public function scopeAsistencias ($query) {
         $subquery = $this->eventosDeportivos();
         return $subquery;
