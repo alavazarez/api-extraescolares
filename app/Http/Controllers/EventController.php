@@ -45,6 +45,27 @@ class EventController extends Controller
         $response = Event::select('events.id', 'events.type_event_id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description')->join('type_events', 'events.type_event_id', '=', 'type_events.id')->where('events.date', '>=', $date)->get();
         return response()->json($response, 200);
     }
+    public function filtrosEventos($id){
+        if($id == 0)
+        {
+            $response = Event::select('events.id','events.type_event_id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description')->join('type_events', 'events.type_event_id','=','type_events.id')->get();
+            return response()->json($response, 200);
+        }
+        if($id == 1)
+        {
+            $date = Carbon::now();
+            $date->format('Y-m-d H:i:s');
+            $response = Event::select('events.id','events.type_event_id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description')->join('type_events', 'events.type_event_id','=','type_events.id')->where('events.date','<', $date)->get();
+            return response()->json($response, 200);
+        }
+        if($id == 2)
+        {
+            $date = Carbon::now();
+            $date->format('Y-m-d H:i:s');
+            $response = Event::select('events.id','events.type_event_id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description')->join('type_events', 'events.type_event_id','=','type_events.id')->where('events.date','>=', $date)->get();
+            return response()->json($response, 200);
+        }
+    }
 
     /**
      * Update the specified resource in storage.
@@ -138,5 +159,22 @@ class EventController extends Controller
         $acom->typeAcom_id = AcomEnums::ACOM_POR_EVENTO_EXTRAESCOLAR;
         $acom->status = 0;
         $acom->save();
+    }
+
+    public function validateAlumnoEvent($alumnoId, $eventId)
+    {
+        $validar = Event::select('alumno_event.alumno_id','alumno_event.event_id')
+                    ->join('alumno_event','events.id','=','alumno_event.event_id')
+                    ->where('alumno_event.event_id',$eventId)
+                    ->where('alumno_event.alumno_id',$alumnoId)
+                    ->count();
+        if($validar == 1)
+        {
+            return response()->json(true,200);
+        }
+        else
+        {
+            return response()->json(false,200);
+        }
     }
 }
