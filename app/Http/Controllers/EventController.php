@@ -45,7 +45,9 @@ class EventController extends Controller
         $response = Event::select('events.id', 'events.type_event_id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description')->join('type_events', 'events.type_event_id', '=', 'type_events.id')->where('events.date', '>=', $date)->get();
         return response()->json($response, 200);
     }
-    public function filtrosEventos($id){
+
+    public function filtrosEventos($id)
+    {
         if($id == 0)
         {
             $response = Event::select('events.id','events.type_event_id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description')->join('type_events', 'events.type_event_id','=','type_events.id')->get();
@@ -108,33 +110,40 @@ class EventController extends Controller
      */
     public function storeAttendance(Request $request)
     {
-        /**
-         * Cofiguracion de acom
-         */
         $events = [
-            [
+            (object)[
                 'id' => EventEnums::EVENTO_DEPORTIVO,
                 'numero_asistencias' => 3
             ],
-            [
+            (object)[
                 'id' => EventEnums::EVENTO_CULTURAL,
                 'numero_asistencias' => 3
             ],
-            [
+            (object)[
                 'id' => EventEnums::EVENTO_CIVICO,
                 'numero_asistencias' => 2
             ]
         ];
-        foreach ($request->alumnos as $item) {
+        foreach ($request->alumnos as $item)
+        {
             $alumno = Alumno::findOrFail($item['id']);
+
             //Se registra el id del alumno en la tabla pivot, con el evento del id
             $alumno->events()->attach($request->event_id);
-
-            if ($alumno->events()->asistenciaCompletada($events))
+            if($this->TodosEventosCompletados($alumno, $events))
                 $this->registrarAcom($alumno->id);
         }
-
         return response()->json(true,200);
+    }
+
+    private function tieneTodosEventosCompletados ($alumno,$events)
+    {
+        foreach ($events as $index => $event)
+        {
+            if (!$alumno->events()->asistenciaCompletada($event))
+                return false;
+        }
+        return true;
     }
 
     public function getEventsforDate($date)

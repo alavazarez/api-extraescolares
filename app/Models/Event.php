@@ -35,16 +35,16 @@ class Event extends Model
         return $query->where('type_event_id', 3)->count();
     }
 
-    public function scopeAsistenciaCompletada($query, $events){
-        foreach ($events as $event)
-        {
-            $asistencias = $query->where('type_event_id', $event['id'])
-                 ->count(); 
+    public function scopeContarAsistencias ($query, $type_event){
+        return $query->where('type_event_id', $type_event)
+            ->count();
+    }
+    public function scopeAsistenciaCompletada($query, $event){
+        
+        $numero_asistencias_por_tipo_evento = $event->numero_asistencias;
+        $total_asistencias = $query->contarAsistencias($event->id);
 
-            if( $asistencias < $event['numero_asistencias'] )
-                return false;
-        }
-        return true;
+        return $total_asistencias >= $numero_asistencias_por_tipo_evento;
     }
 
     public function scopeAsistencias ($query) {
