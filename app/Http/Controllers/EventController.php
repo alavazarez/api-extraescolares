@@ -130,13 +130,13 @@ class EventController extends Controller
 
             //Se registra el id del alumno en la tabla pivot, con el evento del id
             $alumno->events()->attach($request->event_id);
-            if($this->TodosEventosCompletados($alumno, $events))
+            if($this->todosEventosCompletados($alumno, $events))
                 $this->registrarAcom($alumno->id);
         }
         return response()->json(true,200);
     }
 
-    private function tieneTodosEventosCompletados ($alumno,$events)
+    private function todosEventosCompletados ($alumno,$events)
     {
         foreach ($events as $index => $event)
         {
