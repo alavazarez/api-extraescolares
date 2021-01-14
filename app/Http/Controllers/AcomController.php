@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Acom;
+use App\Models\Alumno;
 use Carbon\Carbon;
 
 class AcomController extends Controller
@@ -19,6 +20,19 @@ class AcomController extends Controller
         {
             Acom::create($request->all());
             return response()->json(true,200);
+        }
+    }
+
+    public function findAcomAlumno($id){
+        $find = Acom::where('alumno_id', $id)->count();
+        if($find == 1)
+        {
+            $alumno = Acom::select('acoms.created_at', 'alumnos.name', 'alumnos.matricula', 'alumnos.carrera', 'alumnos.actividad')->join('alumnos', 'acoms.alumno_id','=','alumnos.id')->where('acoms.alumno_id', $id)->get();
+            return response()->json($alumno,200);
+        }
+        else
+        {
+            return response()->json(false,200);
         }
     }
 
