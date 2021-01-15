@@ -95,3 +95,6 @@ Route::middleware('auth:sanctum')
 
 Route::middleware('auth:sanctum')
     ->post('/user/registerUser', 'UserController@register');
+
+Route::middleware('auth:sanctum')
+    ->post('/user/verifiPassOld/{id}', 'UserController@update');

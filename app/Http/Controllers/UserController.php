@@ -23,12 +23,27 @@ class UserController extends Controller
             return response()->json(false, 200);
            }
         else{
-            /*User::create([
+            User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
-            ]);*/
+            ]);
             return response()->json($data, 200);
         }
+    }
+
+    public function update(Request $data, $id)
+    {
+        $user = User::find($id);
+        if(Hash::check($data->oldPassword, $user->password))
+        {
+            $user->password = Hash::make($data->newPassword);
+            $user->save();
+            return response()->json($data, 200);
+        }
+        else{
+            return response()->json(false, 200);
+        }
+        
     }
 }
