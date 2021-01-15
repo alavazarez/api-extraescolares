@@ -92,3 +92,6 @@ Route::middleware('auth:sanctum')
 
 Route::middleware('auth:sanctum')
     ->get('/user/sendEmail/{email}', 'UserController@sendEmail');
+
+Route::middleware('auth:sanctum')
+    ->post('/user/registerUser', 'UserController@register');
