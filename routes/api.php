@@ -93,8 +93,9 @@ Route::middleware('auth:sanctum')
 Route::middleware('auth:sanctum')
     ->get('/user/sendEmail/{email}', 'UserController@sendEmail');
 
-Route::middleware('auth:sanctum')
-    ->post('/user/registerUser', 'UserController@register');
+Route::post('/user/registerUser', 'UserController@register');
 
 Route::middleware('auth:sanctum')
     ->post('/user/verifiPassOld/{id}', 'UserController@update');
+
+Route::post('/user/sendEmailReset', 'Auth\ForgotPasswordController@sendResetLinkEmail');
