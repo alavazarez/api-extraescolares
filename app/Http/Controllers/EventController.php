@@ -126,8 +126,8 @@ class EventController extends Controller
         ];
         foreach ($request->alumnos as $item)
         {
-            $alumno = Alumno::findOrFail($item['id']);
-
+            $alumno = Alumno::findOrFail($item['no_de_control']);
+            return $alumno;
             //Se registra el id del alumno en la tabla pivot, con el evento del id
             $alumno->events()->attach($request->event_id);
             if($this->todosEventosCompletados($alumno, $events))
@@ -150,13 +150,17 @@ class EventController extends Controller
     {
         $horainicial = $date . ' 00:00:00';
         $horafinal = $date . ' 23:59:59';
-        $events = Event::select('events.id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description')->join('type_events', 'type_event_id', '=', 'type_events.id')->whereBetween('date', [$horainicial, $horafinal])->get();
+        $events = Event::select('events.id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description')
+            ->join('type_events', 'type_event_id', '=', 'type_events.id')
+            ->whereBetween('date', [$horainicial, $horafinal])
+            ->get();
         return response()->json($events, 200);
     }
 
     public function getEventsforPeriod($initialDate, $finalDate)
     {
-        $events = Event::whereBetween('date', [$initialDate, $finalDate])->get();
+        $events = Event::whereBetween('date', [$initialDate, $finalDate])
+            ->get();
         return response()->json($events, 200);
     }
 

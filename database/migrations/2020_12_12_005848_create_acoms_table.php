@@ -15,16 +15,12 @@ class CreateAcomsTable extends Migration
     {
         Schema::create('acoms', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('alumno_id');
+            $table->unsignedBigInteger('no_de_control');
             $table->unsignedBigInteger('typeAcom_id');
             $table->dateTime('dateDelivery')->nullable();
             $table->string('description');
             $table->integer('status');
             $table->timestamps();
-
-            $table->foreign('alumno_id')
-            ->references('id')
-            ->on('alumnos');
 
             $table->foreign('typeAcom_id')
             ->references('id')

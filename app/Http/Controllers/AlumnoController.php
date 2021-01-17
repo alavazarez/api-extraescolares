@@ -3,29 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Models\Alumno;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\AlumnosExport;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Repository\EstudianteRepository;
+ 
 
 class AlumnoController extends Controller
 {
+    protected $estudianteRepository;
+
+    public function __construct(EstudianteRepository $estudianteRepository)
+    {
+        $this->estudianteRepository = $estudianteRepository;
+    }
+    
     public function getAlumnos(){
         $alumnos = Alumno::all();
+        (Object)$data = json_decode($alumnos->getBody());
+        $collection = collect($data->data);
         return response()->json($alumnos);
     }
+    
 
     public function find($matricula){
-        $find = Alumno::where('matricula', $matricula)->count();
-        if($find == 1)
-        {
-            $alumno = Alumno::where('matricula',$matricula)->firstOrFail();
-            return response()->json($alumno,200);
-        }
-        else
-        {
-            return response()->json(false,200);
-        }
+       $alumno = $this->estudianteRepository->find($matricula);
+       return response()->json($alumno);
     }
 
     public function exportExcel($id){

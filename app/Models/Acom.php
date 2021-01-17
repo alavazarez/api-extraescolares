@@ -14,11 +14,6 @@ class Acom extends Model
         'status',
     ];
 
-    public function alumnos()
-    {
-        return $this->belongsTo('App\Models\Alumno');
-    }
-
     public function typeAcoms()
     {
         return $this->belongsTo('App\Models\typeAcom');

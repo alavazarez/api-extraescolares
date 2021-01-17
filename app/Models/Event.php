@@ -22,6 +22,11 @@ class Event extends Model
         return $this->belongsTo('App\Models\TypeEvent','type_event_id', 'id');
     }
 
+    public function alummo_event()
+    {
+        return $this->hasMany('App\Models\Alumno_event');
+    }
+
 
     public function scopeEventosDeportivos ($query){
         return $query->where('type_event_id', 1)->count();
@@ -51,10 +56,5 @@ class Event extends Model
         $subquery = $this->eventosDeportivos();
         return $subquery;
     }
-    
 
-    public function alumnos()
-    {
-        return $this->belongsToMany('App\Models\Alumno')->withTimestamps();
-    }
 }
