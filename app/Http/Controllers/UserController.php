@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\RegisterUser;
-use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\Mail\RegisterUser;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-
-use Illuminate\Support\Facades\Password;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
@@ -47,8 +48,33 @@ class UserController extends Controller
         }
         else{
             return response()->json(false, 200);
+        } 
+    }
+
+    public function logout(Request $request)
+    {
+        //$this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        if ($response = $this->loggedOut($request)) {
+            return $response;
         }
-        
+
+        return $request->wantsJson()
+            ? new JsonResponse([], 204)
+            : redirect('/login');
+    }
+    protected function loggedOut(Request $request)
+    {
+        //
+    }
+
+    protected function guard()
+    {
+        return Auth::guard();
     }
 
     /*public function sendEmailReset(Request $request)
