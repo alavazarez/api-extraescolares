@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Acom extends Model
 {
     protected $fillable = [
-        'alumno_id', 
+        'no_de_control', 
         'typeAcom_id', 
         'dateDelivery',
         'description',

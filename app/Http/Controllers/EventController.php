@@ -6,11 +6,12 @@ use Carbon\Carbon;
 use App\Models\Acom;
 use App\Models\Event;
 use App\Models\Alumno;
+use App\Enums\AcomEnums;
+use App\Enums\EventEnums;
+use App\Models\Asistencia;
 use Illuminate\Http\Request;
 use App\Http\Requests\EventRequest;
 use App\Http\Requests\StoreAttendanceRequest;
-use App\Enums\EventEnums;
-use App\Enums\AcomEnums;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class EventController extends Controller
@@ -124,16 +125,21 @@ class EventController extends Controller
                 'numero_asistencias' => 2
             ]
         ];
-        foreach ($request->alumnos as $item)
+       /*  foreach ($request->alumnos as $item)
         {
-            $alumno = Alumno::findOrFail($item['no_de_control']);
-            return $alumno;
-            //Se registra el id del alumno en la tabla pivot, con el evento del id
-            $alumno->events()->attach($request->event_id);
-            if($this->todosEventosCompletados($alumno, $events))
-                $this->registrarAcom($alumno->id);
-        }
-        return response()->json(true,200);
+            //Guardar alumno en el evento
+            $asistencia = new Asistencia;
+            $asistencia->no_de_control = $item['no_de_control'];
+            $asistencia->event_id = $request->event_id;
+            $asistencia->save();
+
+            $alumno_asistencia = Asistencia::where('no_de_control', $item['no_de_control'])
+                                    ->get(); 
+           
+        } */
+        $alumno = new Alumno ('16270837');
+        $events = $alumno->events();
+        return response()->json($events[0],200);
     }
 
     private function todosEventosCompletados ($alumno,$events)
@@ -158,7 +164,9 @@ class EventController extends Controller
     }
 
     public function getEventsforPeriod($initialDate, $finalDate)
-    {
+    {       
+        $convert = Carbon::parse($finalDate);
+        $finalDate = $convert->addDay(1);
         $events = Event::whereBetween('date', [$initialDate, $finalDate])
             ->get();
         return response()->json($events, 200);

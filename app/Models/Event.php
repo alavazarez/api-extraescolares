@@ -22,22 +22,9 @@ class Event extends Model
         return $this->belongsTo('App\Models\TypeEvent','type_event_id', 'id');
     }
 
-    public function alummo_event()
+    public function asistencias()
     {
-        return $this->hasMany('App\Models\Alumno_event');
-    }
-
-
-    public function scopeEventosDeportivos ($query){
-        return $query->where('type_event_id', 1)->count();
-    }
-
-    public function scopeEventosCulturales ($query){
-        return $query->where('type_event_id', 2)->count();
-    }
-
-    public function scopeEventosCivicos ($query){
-        return $query->where('type_event_id', 3)->count();
+        return $this->hasMany('App\Models\Asistencia');
     }
 
     public function scopeContarAsistencias ($query, $type_event){
@@ -48,7 +35,6 @@ class Event extends Model
         
         $numero_asistencias_por_tipo_evento = $event->numero_asistencias;
         $total_asistencias = $query->contarAsistencias($event->id);
-
         return $total_asistencias >= $numero_asistencias_por_tipo_evento;
     }
 

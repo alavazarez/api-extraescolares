@@ -13,9 +13,9 @@ class CreateAlumnoEventTable extends Migration
      */
     public function up()
     {
-        Schema::create('alumno_event', function (Blueprint $table) {
+        Schema::create('Asistencias', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('no_de_control');
+            $table->string('no_de_control');
             $table->unsignedBigInteger('event_id');
             $table->timestamps();
             
@@ -32,6 +32,6 @@ class CreateAlumnoEventTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('alumno_event');
+        Schema::dropIfExists('Asistencias');
     }
 }
