@@ -19,7 +19,7 @@ class AcomController extends Controller
         else
         {
             Acom::create($request->all());
-            return response()->json($request,200);
+            return response()->json(true,200);
         }
     }
 
