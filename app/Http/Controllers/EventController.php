@@ -135,13 +135,17 @@ class EventController extends Controller
            $alumno = new Alumno ($item['no_de_control']);
 
            if($alumno->hasAllEventsCompleted($events)){
-                return response()->json(true,200);
+                $this->registrarAcom($item['no_de_control']);
            }
         }
         return response()->json(true,200);
     }
 
-   
+   /**
+    * Desc-
+    * @param
+    * @return
+    */
     public function getEventsforDate($date)
     {
         $horainicial = $date . ' 00:00:00';
@@ -165,11 +169,12 @@ class EventController extends Controller
     public function registrarAcom($id)
     {
         $acom = new Acom;
-        $acom->alumno_id = $id;
+        $acom->no_de_control = $id;
         $acom->description = "Liberación por evento extraescolar";
         $acom->typeAcom_id = AcomEnums::ACOM_POR_EVENTO_EXTRAESCOLAR;
         $acom->status = 0;
         $acom->save();
+        return true;
     }
 
     public function validateAlumnoEvent($alumnoId, $eventId)

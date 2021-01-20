@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Asistencia extends Model
 {
     public function events(){
-        return $this->hasOne('App\Models\Event','id','event_id');
+        return $this->belongsTo('App\Models\Event','event_id','id');
     }
 
     public function scopeEventosDeportivos ($query){

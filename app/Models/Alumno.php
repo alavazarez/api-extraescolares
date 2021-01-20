@@ -10,14 +10,17 @@ class Alumno
     private $nombre;
 
     public function __construct($no_de_control){
+
         $this->no_de_control = $no_de_control;
+
     }
     
-
     /**
-     * 
+     * Función que permite contar la asistencia de un alumno a un evento  determinado
+     * @param Number $type_event id del tipo de evento a filtrar
+     * @return Number Total de asistencias a un evento
      */
-    private function asistenciasTotales($type_event){
+    public function asistenciasTotales($type_event){
         return Asistencia::select('asistencias.no_de_control')
             ->join('events','asistencias.event_id','=','events.id')
             ->where('events.type_event_id',$type_event)

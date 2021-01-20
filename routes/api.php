@@ -2,8 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use GuzzleHttp\Client;
-use App\Models\Event;
+use Illuminate\Support\Facades\Cache;
+use App\Repository\EstudianteRepository;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,12 +16,27 @@ use App\Models\Event;
 |
 */
 
-Route::get('/estudiantes', function (Client $client){
-    $response = $client->request('GET', "api/estudiantes");
-    (Object)$data = json_decode($response->getBody());
-    $collection = collect($data->data);
-    dd($collection);
-    return $response;
+Route::get('/testcache', function (EstudianteRepository $estudianteRepository){
+    $alumno = collect(Cache::get('alumnos'));
+    $res = $estudianteRepository->find('21270001');
+    $concatenated = $alumno->push($res);
+    Cache::put('alumnos', $concatenated, 10000);
+    return response()->json(true,200);
+});
+
+Route::get('/find/cache', function (){
+    $json = '{
+        "items" : [
+            {
+                "name":"Eduardo",
+                "no_de_control" : "16270837"
+            }
+        ]
+    }';
+    $res = json_encode(Cache::get('alumnos')); // se pasa a json
+    $response = json_decode($res);
+    dd(collect(Cache::get('alumnos')));
+    return response()->json($response,200);
 });
 
 
@@ -53,7 +68,10 @@ Route::middleware('auth:sanctum')
 Route::middleware('auth:sanctum')
     ->get('/alumnos', 'AlumnoController@getAlumnos');
 
-Route::get('/alumno/{matricula}', 'AlumnoController@find');
+Route::middleware('auth:sanctum')
+    ->get('/alumnos/event/', 'AlumnoController@getAlumnos');
+
+Route::get('/alumno/asisteencias/{id}', 'AlumnoController@asistencias');
 
 Route::middleware('auth:sanctum')
     ->get('/acom/index', 'AcomController@getAcoms');
@@ -102,3 +120,4 @@ Route::middleware('auth:sanctum')
 
 Route::middleware('auth:sanctum')
     ->get('/user/sendEmail/{email}', 'UserController@sendEmail');
+
