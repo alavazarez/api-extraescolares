@@ -125,33 +125,23 @@ class EventController extends Controller
                 'numero_asistencias' => 2
             ]
         ];
-       /*  foreach ($request->alumnos as $item)
+        foreach ($request->alumnos as $item)
         {
-            //Guardar alumno en el evento
             $asistencia = new Asistencia;
             $asistencia->no_de_control = $item['no_de_control'];
             $asistencia->event_id = $request->event_id;
-            $asistencia->save();
+            $asistencia->save(); 
 
-            $alumno_asistencia = Asistencia::where('no_de_control', $item['no_de_control'])
-                                    ->get(); 
-           
-        } */
-        $alumno = new Alumno ('16270837');
-        $events = $alumno->events();
-        return response()->json($events[0],200);
-    }
+           $alumno = new Alumno ($item['no_de_control']);
 
-    private function todosEventosCompletados ($alumno,$events)
-    {
-        foreach ($events as $index => $event)
-        {
-            if (!$alumno->events()->asistenciaCompletada($event))
-                return false;
+           if($alumno->hasAllEventsCompleted($events)){
+                return response()->json(true,200);
+           }
         }
-        return true;
+        return response()->json(true,200);
     }
 
+   
     public function getEventsforDate($date)
     {
         $horainicial = $date . ' 00:00:00';
