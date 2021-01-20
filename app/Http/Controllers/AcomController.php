@@ -19,7 +19,7 @@ class AcomController extends Controller
         else
         {
             Acom::create($request->all());
-            return response()->json($request,200);
+            return response()->json(true,200);
         }
     }
 
@@ -47,6 +47,7 @@ class AcomController extends Controller
         $date = Carbon::now();
         $acom = Acom::find($id);
         $acom->dateDelivery = $date->format('Y-m-d H:i:s');
+        $acom->status = 1;
         $acom->save();
         return response()->json($acom, 200);
     }

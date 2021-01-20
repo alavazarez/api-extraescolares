@@ -15,8 +15,8 @@ class CreateAcomsTable extends Migration
     {
         Schema::create('acoms', function (Blueprint $table) {
             $table->id();
-            $table->string('no_de_control');
             $table->unsignedBigInteger('typeAcom_id');
+            $table->string('no_de_control');
             $table->dateTime('dateDelivery')->nullable();
             $table->string('description');
             $table->integer('status');
