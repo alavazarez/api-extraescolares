@@ -118,9 +118,6 @@ Route::middleware('auth:sanctum')
 
 Route::get('/acom/findAcomAlumno/{id}', 'AcomController@findAcomAlumno');
 
-Route::middleware('auth:sanctum')
-    ->get('/user/sendEmail/{email}', 'UserController@sendEmail');
-
 Route::post('/user/registerUser', 'UserController@register');
 
 Route::middleware('auth:sanctum')

@@ -6,11 +6,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
@@ -100,6 +97,7 @@ class UserController extends Controller
             }
         }
     }
+
     public function resetPassword(Request $request)
     {
         $request->validate([
@@ -164,53 +162,4 @@ class UserController extends Controller
         return Auth::guard();
     }
 
-
-
-
-
-    public function sendEmailReset(Request $request)
-    {
-        $this->validateEmail($request);
-
-        $response = $this->broker()->sendResetLink(
-            $this->credentials($request)
-        );
-
-        return $response == Password::RESET_LINK_SENT
-                    ? $this->sendResetLinkResponse($request, $response)
-                    : $this->sendResetLinkFailedResponse($request, $response);
-        
-        //return response()->json($data,200);
-    }
-
-    protected function validateEmail(Request $request)
-    {
-        $request->validate(['email' => 'required|email']);
-    }
-    protected function credentials(Request $request)
-    {
-        return $request->only('email');
-    }
-    protected function sendResetLinkResponse(Request $request, $response)
-    {
-        return $request->wantsJson()
-                    ? new JsonResponse(['message' => trans($response)], 200)
-                    : back()->with('status', trans($response));
-    }
-    protected function sendResetLinkFailedResponse(Request $request, $response)
-    {
-        if ($request->wantsJson()) {
-            throw ValidationException::withMessages([
-                'email' => [trans($response)],
-            ]);
-        }
-
-        return back()
-                ->withInput($request->only('email'))
-                ->withErrors(['email' => trans($response)]);
-    }
-    public function broker()
-    {
-        return Password::broker();
-    }
 }

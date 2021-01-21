@@ -7,15 +7,13 @@
 </head>
 <body>
     <p align="center">TECNOLOGICO NACIONAL DE MEXICO</p>
-    <p>Hola! se ha recibido una peticion a este correo para registrarse como nuevo usuario</p>
-    <p>Los datos que necesitara para registrarse son:</p>
-    <ul>
-        <li>Nombre completo </li>
-        <li>Correo electronico: </li>
-        <li>Contraseña </li>
-    </ul>
-    <p>Hacer click en el siguiente enlace para resetear.</p>
+    <p>Hola! se ha recibido una peticion a este correo para actualizar la contraseña de este usuario</p>
+
+    <p>El siguiente numero es un codigo de verificacion con el cual podrá restaurar su contraseña</p>
+    
     <strong>{{ $random }}</strong>
+
+    <p>En el formulario que se abrio, copie y pegue este codigo</p>
     
 
 </body>
