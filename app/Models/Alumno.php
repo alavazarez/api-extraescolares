@@ -16,6 +16,22 @@ class Alumno
     }
     
     /**
+     * Función que se encarga de obtener las asitencias por los tipo de evenntos
+     */
+    public function obtenerAsistencias($eventos)
+    {
+        $total_asistencias = [];
+        foreach ($eventos as $evento){
+            $asistencias = (Object) [];
+            $asistencias->type = $evento->type;
+            $asistencias->type_event = $evento->type_event;
+            $asistencias->total_asistencia = $this->asistenciasTotales($evento->type_event);
+            $total_asistencias[]= $asistencias;
+        }
+        return $total_asistencias ;
+    }
+
+    /**
      * Función que permite contar la asistencia de un alumno a un evento  determinado
      * @param Number $type_event id del tipo de evento a filtrar
      * @return Number Total de asistencias a un evento

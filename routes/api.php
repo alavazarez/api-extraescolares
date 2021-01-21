@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Route;
 use App\Repository\EstudianteRepository;
+use App\Http\Resources\AlumnoAsistenciaDeEventos;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,16 @@ use App\Repository\EstudianteRepository;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+
+Route::get('/alumno/avance/{no_de_control}', 'AlumnoController@obtenerAvanceDeEventos');
+
+
+Route::get('/asistencia/alumno', function (EstudianteRepository $estudianteRepository) {
+    $alumno = $estudianteRepository->find('21270001');
+    $asistencia = new AlumnoAsistenciaDeEventos($alumno);
+    return $asistencia->toJson();
+});
 
 Route::get('/testcache', function (EstudianteRepository $estudianteRepository){
     $alumno = collect(Cache::get('alumnos'));

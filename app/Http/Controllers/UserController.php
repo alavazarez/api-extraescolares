@@ -114,4 +114,6 @@ class UserController extends Controller
     {
         return Password::broker();
     }
+
+    
 }
