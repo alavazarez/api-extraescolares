@@ -9,19 +9,11 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
-    public function sendEmail($email)
-    {
-        $route = 'http://localhost:8080/User/AddUser';
-        Mail::to($email)->send(new RegisterUser($route));
-        return response()->json($email,200);
-    }
-
     public function register(Request $data)
     {
         if(User::where('email', $data['email'] )->exists()){
@@ -77,7 +69,7 @@ class UserController extends Controller
         return Auth::guard();
     }
 
-    /*public function sendEmailReset(Request $request)
+    public function sendEmailReset(Request $request)
     {
         $this->validateEmail($request);
 
@@ -121,5 +113,5 @@ class UserController extends Controller
     public function broker()
     {
         return Password::broker();
-    }*/
+    }
 }
