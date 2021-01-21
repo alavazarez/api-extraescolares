@@ -177,14 +177,10 @@ class EventController extends Controller
         return true;
     }
 
-    public function validateAlumnoEvent($alumnoId, $eventId)
+    public function validateAlumnoEvent($no_de_control, $event_id)
     {
-        $validar = Event::select('alumno_event.alumno_id','alumno_event.event_id')
-                    ->join('alumno_event','events.id','=','alumno_event.event_id')
-                    ->where('alumno_event.event_id',$eventId)
-                    ->where('alumno_event.alumno_id',$alumnoId)
-                    ->count();
-        if($validar == 1)
+        $validar = Asistencia::where('no_de_control',$no_de_control)->where('event_id', $event_id)->exists();
+        if($validar == true)
         {
             return response()->json(true,200);
         }

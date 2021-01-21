@@ -68,6 +68,8 @@ Route::middleware('auth:sanctum')
 Route::middleware('auth:sanctum')
     ->get('/alumnos', 'AlumnoController@getAlumnos');
 
+Route::get('/alumno/{matricula}', 'AlumnoController@find');
+
 Route::middleware('auth:sanctum')
     ->get('/alumnos/event/', 'AlumnoController@getAlumnos');
 
@@ -106,7 +108,7 @@ Route::middleware('auth:sanctum')
     ->get('/eventForDate/{date}', 'EventController@getEventsforDate');
 
 Route::middleware('auth:sanctum')
-    ->get('/alumnoEvent/{idAlumno}/{idEvento}', 'EventController@validateAlumnoEvent');
+    ->get('/alumnoEvent/{no_de_control}/{event_id}', 'EventController@validateAlumnoEvent');
 
 Route::middleware('auth:sanctum')
     ->get('/event/filtrosEventos/{idFiltro}', 'EventController@filtrosEventos');
@@ -119,8 +121,6 @@ Route::get('/acom/findAcomAlumno/{id}', 'AcomController@findAcomAlumno');
 Route::middleware('auth:sanctum')
     ->get('/user/sendEmail/{email}', 'UserController@sendEmail');
 
-<<<<<<< HEAD
-=======
 Route::post('/user/registerUser', 'UserController@register');
 
 Route::middleware('auth:sanctum')
@@ -131,4 +131,3 @@ Route::post('/user/sendEmailReset', 'Auth\ForgotPasswordController@sendResetLink
 Route::middleware('auth:sanctum')
     ->post('/logout', 'UserController@logout');
 
->>>>>>> ac512b1a066cab8cc00d30b2235a06fca46244a1
