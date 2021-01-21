@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Alumno;
-use GuzzleHttp\Client;
 use App\Enums\EventEnums;
-use Illuminate\Http\Request;
-use App\Exports\AlumnosExport;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Repository\EstudianteRepository;
+use App\Http\Resources\AlumnoAsistenciaDeEventos;
 
 
 class AlumnoController extends Controller
@@ -20,39 +17,26 @@ class AlumnoController extends Controller
         $this->estudianteRepository = $estudianteRepository;
     }
 
-    public function getAlumnos()
-    {
-        $alumnos = Alumno::all();
-        (object)$data = json_decode($alumnos->getBody());
-        $collection = collect($data->data);
-        return response()->json($alumnos);
-    }
-
-
     public function find($matricula)
     {
         $alumno = $this->estudianteRepository->find($matricula);
         return response()->json($alumno);
     }
 
-    public function asistencias($no_de_control)
+    public function obtenerAvanceDeEventos($no_de_control)
     {
-        $events = [
-            EventEnums::EVENTO_DEPORTIVO, 
-            EventEnums::EVENTO_CULTURAL, 
-            EventEnums::EVENTO_CIVICO
+        $eventos  =  [
+            (Object)["type_event" => EventEnums::EVENTO_DEPORTIVO, "type" => "Deportivos"], 
+            (Object)["type_event" => EventEnums::EVENTO_CULTURAL, "type" => "Culturales"], 
+            (Object)["type_event" => EventEnums::EVENTO_CIVICO, "type" => "Cívicos"]
         ];
         $alumno = new Alumno($no_de_control);
 
-        $asistencias_to_events = array();
+        $asistencias = $alumno->obtenerAsistencias($eventos);
+        $alumno = $this->estudianteRepository->find($no_de_control);
 
-        foreach ($events as $event) {
-            $total_de_asistencias_to_event = $alumno->asistenciasTotales($event);
-            array_push($asistencias_to_events, $total_de_asistencias_to_event);
-        }
+        $avance_eventos = new AlumnoAsistenciaDeEventos($alumno,$asistencias);
 
-        return response()->json($asistencias_to_events, 200);
+        return $avance_eventos->toJson();
     }
-
-    //$prueba = Alumno::select('alumnos.id','alumno_event.event_id','events.type_event_id')->join('alumno_event','alumnos.id','=','alumno_event.alumno_id')->join('events', 'alumno_event.event_id','=','events.id')->where('alumnos.id',1)->count()
 }
