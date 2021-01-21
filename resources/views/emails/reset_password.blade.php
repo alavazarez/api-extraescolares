@@ -14,8 +14,8 @@
         <li>Correo electronico: </li>
         <li>Contraseña </li>
     </ul>
-    <p>Hacer click en el siguiente enlace para registrarse.</p>
-    <a href="{{ $route }}">Registrarme</a>
+    <p>Hacer click en el siguiente enlace para resetear.</p>
+    <strong>{{ $random }}</strong>
     
 
 </body>

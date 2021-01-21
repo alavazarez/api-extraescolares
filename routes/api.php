@@ -126,7 +126,9 @@ Route::post('/user/registerUser', 'UserController@register');
 Route::middleware('auth:sanctum')
     ->post('/user/verifiPassOld/{id}', 'UserController@update');
 
-Route::post('/user/sendEmailReset', 'UserController@sendEmailReset');
+Route::post('/user/sendEmailReset', 'UserController@resetPasswordRequest');
+
+Route::post('/user/passwordReset', 'UserController@resetPassword');
 
 Route::middleware('auth:sanctum')
     ->post('/logout', 'UserController@logout');
