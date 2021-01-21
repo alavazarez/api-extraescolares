@@ -20,7 +20,7 @@ class AlumnoAsistenciaDeEventos
 
     private function setAlumno($alumno){
         //dd($alumno->nombre);
-        $this->resource->alumno->nombre = $alumno;
+        $this->resource->alumno = $alumno;
     }
 
     private function setEventos($eventos){
