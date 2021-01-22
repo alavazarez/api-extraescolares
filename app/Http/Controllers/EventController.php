@@ -28,6 +28,19 @@ class EventController extends Controller
         return response()->json('Guardado exitoso', 200);
     }
 
+    public function validarEvent($id)
+    {
+        $verificar = Event::find($id);
+        if($verificar->asistencias()->exists() == true)
+            {
+                return response()->json(true, 200);
+            }
+        else
+        {
+            return response()->json(false, 200);
+        }
+    }
+
     /**
      * Obtiene la lista de eventos
      * @return Illuminate\Http\Response
