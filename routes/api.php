@@ -62,6 +62,9 @@ Route::middleware('auth:sanctum')
     ->post('/evento/store', 'EventController@store');
 
 Route::middleware('auth:sanctum')
+    ->get('/evento/validarEvent/{id}', 'EventController@validarEvent');
+
+Route::middleware('auth:sanctum')
     ->post('/evento/edit/{id}', 'EventController@update');
 
 Route::middleware('auth:sanctum')
