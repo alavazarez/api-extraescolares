@@ -4,23 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Alumno;
 use App\Enums\EventEnums;
-use App\Repository\EstudianteRepository;
+use App\Service\findAlumno;
 use App\Http\Resources\AlumnoAsistenciaDeEventos;
-
+use App\Repository\EstudianteRepository;
 
 class AlumnoController extends Controller
 {
-    protected $estudianteRepository;
-
-    public function __construct(EstudianteRepository $estudianteRepository)
-    {
-        $this->estudianteRepository = $estudianteRepository;
-    }
-
     public function find($matricula)
     {
-        $alumno = $this->estudianteRepository->find($matricula);
-        return response()->json($alumno);
+        $alumno = new findAlumno ();
+        $response = $alumno->find($matricula);
+        return response()->json($response);
     }
 
     public function obtenerAvanceDeEventos($no_de_control)

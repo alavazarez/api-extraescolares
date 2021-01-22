@@ -11,9 +11,11 @@ class GuzzleHttpRequest {
     protected $client;
     protected $response;
 
-    public function __construct(Client $client)
+    public function __construct()
     {
-        $this->client = $client;
+        $baseUrl = env('API_ENDPOINT');
+        $this->client = new Client (['base_uri' => $baseUrl]);
+        
     }
 
     protected function get($url) {

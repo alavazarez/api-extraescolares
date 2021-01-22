@@ -4,15 +4,13 @@ namespace App\Models;
 
 use App\Models\Asistencia;
 
-class Alumno
+class Alumno extends
 {
     private $no_de_control;
     private $nombre;
 
     public function __construct($no_de_control){
-
         $this->no_de_control = $no_de_control;
-
     }
     
     /**

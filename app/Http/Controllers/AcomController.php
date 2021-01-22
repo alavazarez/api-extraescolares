@@ -13,35 +13,30 @@ use FFI\Exception as FFIException;
 class AcomController extends Controller
 {
     public function store(Request $request, $id)
-    {   
-        $acom = Acom::where('no_de_control',$id)->count();
-        if($acom > 0)
-        {
-            return response()->json(false,200);
-        }
-        else
-        {
+    {
+        $acom = Acom::where('no_de_control', $id)->count();
+        if ($acom > 0) {
+            return response()->json(false, 200);
+        } else {
             Acom::create($request->all());
-            return response()->json(true,200);
+            return response()->json(true, 200);
         }
     }
 
-    public function findAcomAlumno($id){
+    public function findAcomAlumno($id)
+    {
         $find = Acom::where('no_de_control', $id)->exists();
-        if($find == true)
-        {
+        if ($find == true) {
             $alumno = Acom::select('acoms.created_at')->where('acoms.no_de_control', $id)->get();
-            return response()->json($alumno,200);
-        }
-        else
-        {
-            return response()->json(false,200);
+            return response()->json($alumno, 200);
+        } else {
+            return response()->json(false, 200);
         }
     }
 
     public function getAcoms()
     {
-        $response = Acom::select('acoms.id', 'type_Acoms.type', 'acoms.dateDelivery', 'acoms.description', 'acoms.status')->join('type_Acoms','acoms.typeAcom_id','=','type_Acoms.id')->get();
+        $response = Acom::select('acoms.id', 'type_Acoms.type', 'acoms.dateDelivery', 'acoms.description', 'acoms.status')->join('type_Acoms', 'acoms.typeAcom_id', '=', 'type_Acoms.id')->get();
         return response()->json($response, 200);
     }
 
@@ -57,29 +52,27 @@ class AcomController extends Controller
 
     public function exportarAcomLiberados($initialDate, $finalDate)
     {
-        $acom = Acom::select('acoms.id', 'alumnos.name', 'alumnos.matricula','alumnos.carrera', 'alumnos.semestre', 'alumnos.actividad', 'type_acoms.type', 'acoms.dateDelivery', 'acoms.description')->join('alumnos','acoms.alumno_id','=','alumnos.id')->join('type_acoms', 'acoms.typeAcom_id','=','type_acoms.id')->whereBetween('dateDelivery', [$initialDate, $finalDate])->get();
-        return response()->json($acom,200);
+        $acom = Acom::select('acoms.id', 'alumnos.name', 'alumnos.matricula', 'alumnos.carrera', 'alumnos.semestre', 'alumnos.actividad', 'type_acoms.type', 'acoms.dateDelivery', 'acoms.description')->join('alumnos', 'acoms.alumno_id', '=', 'alumnos.id')->join('type_acoms', 'acoms.typeAcom_id', '=', 'type_acoms.id')->whereBetween('dateDelivery', [$initialDate, $finalDate])->get();
+        return response()->json($acom, 200);
     }
 
     public function exportarAcomsPendientes()
     {
-        $acom = Acom::select('acoms.id', 'alumnos.name', 'alumnos.matricula','alumnos.carrera', 'alumnos.semestre', 'alumnos.actividad', 'type_acoms.type', 'acoms.dateDelivery', 'acoms.description')->join('alumnos','acoms.alumno_id','=','alumnos.id')->join('type_acoms', 'acoms.typeAcom_id','=','type_acoms.id')->where('dateDelivery', null)->get();
-        return response()->json($acom,200);
+        $acom = Acom::select('acoms.id', 'alumnos.name', 'alumnos.matricula', 'alumnos.carrera', 'alumnos.semestre', 'alumnos.actividad', 'type_acoms.type', 'acoms.dateDelivery', 'acoms.description')->join('alumnos', 'acoms.alumno_id', '=', 'alumnos.id')->join('type_acoms', 'acoms.typeAcom_id', '=', 'type_acoms.id')->where('dateDelivery', null)->get();
+        return response()->json($acom, 200);
     }
-    public function filtrosAcoms($id){
-        if($id == 0)
-        {
-            $response = Acom::select('acoms.id', 'type_Acoms.type', 'acoms.dateDelivery', 'acoms.description', 'acoms.status')->join('type_Acoms','acoms.typeAcom_id','=','type_Acoms.id')->get();
+    public function filtrosAcoms($id)
+    {
+        if ($id == 0) {
+            $response = Acom::select('acoms.id', 'type_Acoms.type', 'acoms.dateDelivery', 'acoms.description', 'acoms.status')->join('type_Acoms', 'acoms.typeAcom_id', '=', 'type_Acoms.id')->get();
             return response()->json($response, 200);
         }
-        if($id == 1)
-        {
-            $response = Acom::select('acoms.id', 'type_Acoms.type', 'acoms.dateDelivery', 'acoms.description', 'acoms.status')->join('type_Acoms','acoms.typeAcom_id','=','type_Acoms.id')->where('acoms.dateDelivery','!=', null)->get();
+        if ($id == 1) {
+            $response = Acom::select('acoms.id', 'type_Acoms.type', 'acoms.dateDelivery', 'acoms.description', 'acoms.status')->join('type_Acoms', 'acoms.typeAcom_id', '=', 'type_Acoms.id')->where('acoms.dateDelivery', '!=', null)->get();
             return response()->json($response, 200);
         }
-        if($id == 2)
-        {
-            $response = Acom::select('acoms.id', 'type_Acoms.type', 'acoms.dateDelivery', 'acoms.description', 'acoms.status')->join('type_Acoms','acoms.typeAcom_id','=','type_Acoms.id')->where('acoms.dateDelivery','=', null)->get();
+        if ($id == 2) {
+            $response = Acom::select('acoms.id', 'type_Acoms.type', 'acoms.dateDelivery', 'acoms.description', 'acoms.status')->join('type_Acoms', 'acoms.typeAcom_id', '=', 'type_Acoms.id')->where('acoms.dateDelivery', '=', null)->get();
             return response()->json($response, 200);
         }
     }
