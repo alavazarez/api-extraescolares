@@ -19,36 +19,7 @@ use App\Http\Resources\AlumnoAsistenciaDeEventos;
 
 
 Route::get('/alumno/avance/{no_de_control}', 'AlumnoController@obtenerAvanceDeEventos');
-
-
-Route::get('/asistencia/alumno', function (EstudianteRepository $estudianteRepository) {
-    $alumno = $estudianteRepository->find('21270001');
-    $asistencia = new AlumnoAsistenciaDeEventos($alumno);
-    return $asistencia->toJson();
-});
-
-Route::get('/testcache', function (EstudianteRepository $estudianteRepository){
-    $alumno = collect(Cache::get('alumnos'));
-    $res = $estudianteRepository->find('21270001');
-    $concatenated = $alumno->push($res);
-    Cache::put('alumnos', $concatenated, 10000);
-    return response()->json(true,200);
-});
-
-Route::get('/find/cache', function (){
-    $json = '{
-        "items" : [
-            {
-                "name":"Eduardo",
-                "no_de_control" : "16270837"
-            }
-        ]
-    }';
-    $res = json_encode(Cache::get('alumnos')); // se pasa a json
-    $response = json_decode($res);
-    dd(collect(Cache::get('alumnos')));
-    return response()->json($response,200);
-});
+Route::get('/formacion-integral/{no_de_control}', 'FormacionIntegralController@find');
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Asistencia;
 
-class Alumno extends
+class Alumno
 {
     private $no_de_control;
     private $nombre;

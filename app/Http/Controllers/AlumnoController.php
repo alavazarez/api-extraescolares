@@ -10,6 +10,11 @@ use App\Repository\EstudianteRepository;
 
 class AlumnoController extends Controller
 {
+    protected $estudianteRepository;
+
+    public function __construct() {
+        $this->estudianteRepository = new EstudianteRepository ();
+    }
     public function find($matricula)
     {
         $alumno = new findAlumno ();
