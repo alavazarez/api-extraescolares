@@ -174,8 +174,7 @@ class EventController extends Controller
     {       
         $convert = Carbon::parse($finalDate);
         $finalDate = $convert->addDay(1);
-        $events = Event::whereBetween('date', [$initialDate, $finalDate])
-            ->get();
+        $events = Event::select('events.id', 'type_events.type', 'events.nameEvent', 'events.organizer', 'events.description', 'events.date', 'events.place')->join('type_events', 'events.type_event_id', '=', 'type_events.id')->whereBetween('date', [$initialDate, $finalDate])->get();
         return response()->json($events, 200);
     }
 
