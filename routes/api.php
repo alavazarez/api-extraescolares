@@ -115,3 +115,5 @@ Route::post('/user/passwordReset', 'UserController@resetPassword');
 Route::middleware('auth:sanctum')
     ->post('/logout', 'UserController@logout');
 
+Route::get('/acom/datosAcom', 'AcomController@getdatosAcom');
+
