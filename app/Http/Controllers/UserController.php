@@ -21,6 +21,7 @@ class UserController extends Controller
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
+                'isAdmin' => $data['isAdmin']
             ]);
             return response()->json($data, 200);
         }

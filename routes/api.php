@@ -103,7 +103,8 @@ Route::middleware('auth:sanctum')
 
 Route::get('/acom/findAcomAlumno/{id}', 'AcomController@findAcomAlumno');
 
-Route::post('/user/registerUser', 'UserController@register');
+Route::middleware('auth:sanctum')
+    ->post('/user/registerUser', 'UserController@register');
 
 Route::middleware('auth:sanctum')
     ->post('/user/verifiPassOld/{id}', 'UserController@update');
