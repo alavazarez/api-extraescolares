@@ -14,6 +14,7 @@ class FormacionIntegralController extends Controller
 
     public function find($no_de_control)
     {
-        return $this->FormacionIntegralRepository->find($no_de_control);
+        $response = $this->FormacionIntegralRepository->find($no_de_control);
+        return response()->json($response,200);
     }
 }
