@@ -40,9 +40,10 @@ class AlumnoController extends Controller
         $alumnoFind = new findAlumno ();
 
         $asistencias = $alumno->obtenerAsistencias($eventos);
+        $formacionIntegral = $alumno->obtenerFormacionIntegral();
         $alumnoResult = $alumnoFind->find($no_de_control);
 
-        $avance_eventos = new AlumnoAsistenciaDeEventos($alumnoResult,$asistencias);
+        $avance_eventos = new AlumnoAsistenciaDeEventos($alumnoResult,$asistencias ,$formacionIntegral);
 
         return $avance_eventos->toJson();
     }

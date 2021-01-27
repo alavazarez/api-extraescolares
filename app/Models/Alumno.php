@@ -3,16 +3,24 @@
 namespace App\Models;
 
 use App\Models\Asistencia;
+use App\Repository\FormacionIntegralRepository;
 
 class Alumno
 {
     private $no_de_control;
-    private $nombre;
 
     public function __construct($no_de_control){
         $this->no_de_control = $no_de_control;
     }
     
+    /**
+     * Función que se encarga de otener el curso de formación del alumno
+     */
+    public function obtenerFormacionIntegral()
+    {
+        $FormacionIntegralRepository = new FormacionIntegralRepository ();
+        return $FormacionIntegralRepository->find($this->no_de_control);
+    } 
     /**
      * Función que se encarga de obtener las asitencias por los tipo de evenntos
      */
@@ -45,7 +53,7 @@ class Alumno
     /**
      * Función que se encarga de devolver un true solo si la asistencia al evento 
      * recibido está completada.
-     * @param Object $event - Objecto tipo
+     * @param Object $event
      */
     private function asistenciaCompletada($event)
     {
@@ -57,8 +65,8 @@ class Alumno
     /**
      * Método que se encarga de devolver true si todos los eventos están completados
      *  @param Array $events - Array de objetos que contiene las id del los tipos de evento y el total
-     *  de asistencias que necesitan para ser complatados.
-     *  @return Boolean
+     *  total de asistencias que necesarios para ser complatados.
+     *  @return Boolean 
      */
     public function hasAllEventsCompleted($events)
     {
@@ -69,4 +77,11 @@ class Alumno
         }
         return true;
     }
+
+    public function hasFormacionIntegralAcreditada()
+    {
+       $formacion_integral = $this->obtenerFormacionIntegral();
+       return $formacion_integral->acreditado;
+    }
+    
 }
