@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\AcomEnums;
 use App\Models\Asistencia;
 use App\Repository\FormacionIntegralRepository;
 
@@ -82,6 +83,20 @@ class Alumno
     {
        $formacion_integral = $this->obtenerFormacionIntegral();
        return $formacion_integral->acreditado;
+    }
+
+    public function registrarAcom()
+    {
+        $acom = new Acom;
+        $acom_already_exists = $acom->where('no_de_control', $this->no_de_control)->exists();
+        if($acom_already_exists){
+            return false;
+        }
+        $acom->no_de_control = $this->no_de_control;
+        $acom->description = "Liberación por evento extraescolar";
+        $acom->typeAcom_id = AcomEnums::ACOM_POR_EVENTO_EXTRAESCOLAR;
+        $acom->status = 0;
+        return $acom->save();
     }
     
 }

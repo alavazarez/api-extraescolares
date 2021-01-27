@@ -147,7 +147,7 @@ class EventController extends Controller
 
            $alumno = new Alumno ($item['no_de_control']);
 
-           if($alumno->hasAllEventsCompleted($events)  && $alumno->hasFormacionIntegralAcreditada()){
+           if ( $alumno->hasAllEventsCompleted($events)  && $alumno->hasFormacionIntegralAcreditada() ){
                 $this->registrarAcom($item['no_de_control']);
            }
         }

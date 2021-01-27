@@ -31,6 +31,21 @@ class AlumnoController extends Controller
 
     public function obtenerAvanceDeEventos($no_de_control)
     {
+         $events = [
+            (object)[
+                'id' => EventEnums::EVENTO_DEPORTIVO,
+                'numero_asistencias' => 3
+            ],
+            (object)[
+                'id' => EventEnums::EVENTO_CULTURAL,
+                'numero_asistencias' => 3
+            ],
+            (object)[
+                'id' => EventEnums::EVENTO_CIVICO,
+                'numero_asistencias' => 2
+            ]
+        ];
+
         $eventos  =  [
             (Object)["type_event" => EventEnums::EVENTO_DEPORTIVO, "type" => "Deportivos"], 
             (Object)["type_event" => EventEnums::EVENTO_CULTURAL, "type" => "Culturales"], 
@@ -41,6 +56,11 @@ class AlumnoController extends Controller
 
         $asistencias = $alumno->obtenerAsistencias($eventos);
         $formacionIntegral = $alumno->obtenerFormacionIntegral();
+
+        if ( $alumno->hasAllEventsCompleted($events)  && $alumno->hasFormacionIntegralAcreditada() ){
+            $alumno->registrarAcom();
+        }
+
         $alumnoResult = $alumnoFind->find($no_de_control);
 
         $avance_eventos = new AlumnoAsistenciaDeEventos($alumnoResult,$asistencias ,$formacionIntegral);
