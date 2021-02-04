@@ -118,3 +118,6 @@ Route::middleware('auth:sanctum')
 
 Route::get('/acom/datosAcom', 'AcomController@getdatosAcom');
 
+Route::middleware('auth:sanctum')
+    ->get('/event/getEventsAlumno/{no_de_control}', 'EventController@getEventsAlumno');
+
