@@ -121,3 +121,7 @@ Route::get('/acom/datosAcom', 'AcomController@getdatosAcom');
 Route::middleware('auth:sanctum')
     ->get('/event/getEventsAlumno/{no_de_control}', 'EventController@getEventsAlumno');
 
+Route::middleware('auth:sanctum')
+    ->get('/alumno/StatusExtraescolar/{no_de_control}', 'AlumnoController@getStatusExtraescolar');
+
+
