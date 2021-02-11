@@ -201,4 +201,10 @@ class EventController extends Controller
             return response()->json(false,200);
         }
     }
+
+    public function getEventsAlumno($no_de_control)
+    {
+        $events = Event::join('asistencias', 'events.id', '=', 'asistencias.event_id')->join('type_events', 'events.type_event_id', '=', 'type_events.id')->where('asistencias.no_de_control',$no_de_control)->get();
+        return response()->json($events,200);
+    }
 }

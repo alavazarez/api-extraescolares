@@ -18,7 +18,7 @@ class AlumnoController extends Controller
     }
 
     public function exportExcel($id){
-        $prueba = AlumnoModelo::select('alumnos.nombre' , 'alumnos.apellidos', 'alumnos.no_de_control', 'alumnos.carrera', 'alumnos.semestre')->join('asistencias', 'alumnos.no_de_control', '=', 'asistencias.no_de_control')->join('events','asistencias.event_id','=','events.id')->where('events.id', $id)->get();
+        $prueba = AlumnoModelo::select('alumnos.nombre' , 'alumnos.apellidos', 'alumnos.sexo', 'alumnos.no_de_control', 'alumnos.carrera', 'alumnos.semestre')->join('asistencias', 'alumnos.no_de_control', '=', 'asistencias.no_de_control')->join('events','asistencias.event_id','=','events.id')->where('events.id', $id)->get();
         return response()->json($prueba,200);
     }
     
@@ -27,6 +27,13 @@ class AlumnoController extends Controller
         $alumno = new findAlumno ();
         $response = $alumno->find($matricula);
         return response()->json($response);
+    }
+
+    public function getStatusExtraescolar($no_de_control)
+    {
+        $alumno = new Alumno($no_de_control);
+        $formacionIntegral = $alumno->obtenerFormacionIntegral();
+        return response()->json($formacionIntegral);
     }
 
     public function obtenerAvanceDeEventos($no_de_control)

@@ -32,6 +32,7 @@ class UserController extends Controller
         $user = User::find($id);
         if(Hash::check($data->oldPassword, $user->password))
         {
+            $user->name = $data->name;
             $user->password = Hash::make($data->newPassword);
             $user->save();
             return response()->json($data, 200);
