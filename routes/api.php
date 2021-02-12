@@ -124,4 +124,9 @@ Route::middleware('auth:sanctum')
 Route::middleware('auth:sanctum')
     ->get('/alumno/StatusExtraescolar/{no_de_control}', 'AlumnoController@getStatusExtraescolar');
 
+Route::middleware('auth:sanctum')
+    ->get('/event/getAlumnosEvent/{idEvent}', 'EventController@getAlumnosEvent');
+
+Route::middleware('auth:sanctum')
+    ->post('/event/removeAsistenciaAlumno/{no_de_control}/{idEvento}', 'EventController@removeAsistenciaAlumno');
 

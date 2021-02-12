@@ -9,6 +9,7 @@ use App\Models\Alumno;
 use App\Enums\AcomEnums;
 use App\Enums\EventEnums;
 use App\Models\Asistencia;
+use App\Models\AlumnoModelo;
 use Illuminate\Http\Request;
 use App\Http\Requests\EventRequest;
 use App\Http\Requests\StoreAttendanceRequest;
@@ -206,5 +207,23 @@ class EventController extends Controller
     {
         $events = Event::join('asistencias', 'events.id', '=', 'asistencias.event_id')->join('type_events', 'events.type_event_id', '=', 'type_events.id')->where('asistencias.no_de_control',$no_de_control)->get();
         return response()->json($events,200);
+    }
+
+    public function getAlumnosEvent($idEvent)
+    {
+        $alumnos = AlumnoModelo::select('alumnos.nombre' , 'alumnos.apellidos', 'alumnos.no_de_control', 'alumnos.carrera', 'alumnos.semestre')->join('asistencias', 'alumnos.no_de_control', '=', 'asistencias.no_de_control')->join('events','asistencias.event_id','=','events.id')->where('events.id', $idEvent)->get();
+        return response()->json($alumnos,200);
+    }
+
+    public function removeAsistenciaAlumno($no_de_control, $idEvento)
+    {
+        $res = Asistencia::where('event_id',$idEvento)->where('no_de_control',$no_de_control)->delete();
+        if($res == 1)
+        {
+            return response()->json(true,200);
+        }
+        else{
+            return response()->json(false,200);
+        }
     }
 }
