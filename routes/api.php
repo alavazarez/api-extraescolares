@@ -130,3 +130,8 @@ Route::middleware('auth:sanctum')
 Route::middleware('auth:sanctum')
     ->post('/event/removeAsistenciaAlumno/{no_de_control}/{idEvento}', 'EventController@removeAsistenciaAlumno');
 
+Route::middleware('auth:sanctum')
+    ->get('/acom/validarLiberacion/{idAcom}', 'AcomController@validarLiberacion');
+
+Route::middleware('auth:sanctum')
+    ->post('/acom/destroy', 'AcomController@destroy');

@@ -83,4 +83,31 @@ class AcomController extends Controller
         $datosAcom = ConfigurationACOM::first();
         return response()->json($datosAcom, 200);
     }
+
+    public function validarLiberacion($idAcom)
+    {
+        $response = Acom::find($idAcom);
+        $status = $response->status;
+        if($status == 0)
+        {
+            return response()->json(true, 200);
+        }
+        else{
+            return response()->json(false, 200);
+        }
+    }
+
+    public function destroy(Acom $acom, Request $request)
+    {
+        /*$res = Acom::find($idAcom)->delete();
+        if($res == true)
+        {
+            return response()->json(True, 200);
+        }
+        else{
+            return response()->json(false, 200);
+        }*/
+        $res = $acom::destroy($request->id);
+        return response()->json($res, 200);
+    }
 }

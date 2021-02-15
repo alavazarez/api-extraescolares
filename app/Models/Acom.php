@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Acom extends Model
 {
+    protected $table = 'acoms';
+
     protected $fillable = [
         'no_de_control', 
         'typeAcom_id', 

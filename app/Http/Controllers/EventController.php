@@ -12,8 +12,6 @@ use App\Models\Asistencia;
 use App\Models\AlumnoModelo;
 use Illuminate\Http\Request;
 use App\Http\Requests\EventRequest;
-use App\Http\Requests\StoreAttendanceRequest;
-use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class EventController extends Controller
 {
@@ -33,9 +31,9 @@ class EventController extends Controller
     {
         $verificar = Event::find($id);
         if($verificar->asistencias()->exists() == true)
-            {
-                return response()->json(true, 200);
-            }
+        {
+            return response()->json(true, 200);
+        }
         else
         {
             return response()->json(false, 200);
