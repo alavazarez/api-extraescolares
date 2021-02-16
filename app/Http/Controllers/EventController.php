@@ -47,7 +47,7 @@ class EventController extends Controller
     public function getEvents()
     {
         //$response = Event::all();
-        $response = Event::select('events.id', 'events.type_event_id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description')->join('type_events', 'events.type_event_id', '=', 'type_events.id')->get();
+        $response = Event::select('events.id', 'events.type_event_id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description', 'events.status')->join('type_events', 'events.type_event_id', '=', 'type_events.id')->get();
         return response()->json($response, 200);
     }
 
@@ -55,7 +55,7 @@ class EventController extends Controller
     {
         $date = Carbon::now();
         $date->format('Y-m-d H:i:s');
-        $response = Event::select('events.id', 'events.type_event_id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description')->join('type_events', 'events.type_event_id', '=', 'type_events.id')->where('events.date', '>=', $date)->get();
+        $response = Event::select('events.id', 'events.type_event_id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description', 'events.status')->join('type_events', 'events.type_event_id', '=', 'type_events.id')->where('events.date', '>=', $date)->get();
         return response()->json($response, 200);
     }
 
@@ -63,21 +63,21 @@ class EventController extends Controller
     {
         if($id == 0)
         {
-            $response = Event::select('events.id','events.type_event_id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description')->join('type_events', 'events.type_event_id','=','type_events.id')->get();
+            $response = Event::select('events.id','events.type_event_id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description', 'events.status')->join('type_events', 'events.type_event_id','=','type_events.id')->get();
             return response()->json($response, 200);
         }
         if($id == 1)
         {
             $date = Carbon::now();
             $date->format('Y-m-d H:i:s');
-            $response = Event::select('events.id','events.type_event_id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description')->join('type_events', 'events.type_event_id','=','type_events.id')->where('events.date','<', $date)->get();
+            $response = Event::select('events.id','events.type_event_id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description', 'events.status')->join('type_events', 'events.type_event_id','=','type_events.id')->where('events.date','<', $date)->get();
             return response()->json($response, 200);
         }
         if($id == 2)
         {
             $date = Carbon::now();
             $date->format('Y-m-d H:i:s');
-            $response = Event::select('events.id','events.type_event_id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description')->join('type_events', 'events.type_event_id','=','type_events.id')->where('events.date','>=', $date)->get();
+            $response = Event::select('events.id','events.type_event_id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description', 'events.status')->join('type_events', 'events.type_event_id','=','type_events.id')->where('events.date','>=', $date)->get();
             return response()->json($response, 200);
         }
     }
@@ -99,6 +99,7 @@ class EventController extends Controller
         $event->date = $request->date;
         $event->place = $request->place;
         $event->description = $request->description;
+        $event->status = $request->status;
         $event->save();
 
         return response()->json($event, 200);
@@ -203,13 +204,13 @@ class EventController extends Controller
 
     public function getEventsAlumno($no_de_control)
     {
-        $events = Event::join('asistencias', 'events.id', '=', 'asistencias.event_id')->join('type_events', 'events.type_event_id', '=', 'type_events.id')->where('asistencias.no_de_control',$no_de_control)->get();
+        $events = Event::select('events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description')->join('asistencias', 'events.id', '=', 'asistencias.event_id')->join('type_events', 'events.type_event_id', '=', 'type_events.id')->where('asistencias.no_de_control',$no_de_control)->get();
         return response()->json($events,200);
     }
 
     public function getAlumnosEvent($idEvent)
     {
-        $alumnos = AlumnoModelo::select('alumnos.nombre' , 'alumnos.apellidos', 'alumnos.no_de_control', 'alumnos.carrera', 'alumnos.semestre')->join('asistencias', 'alumnos.no_de_control', '=', 'asistencias.no_de_control')->join('events','asistencias.event_id','=','events.id')->where('events.id', $idEvent)->get();
+        $alumnos = Asistencia::select('alumnos.nombre' , 'alumnos.apellidos', 'alumnos.no_de_control', 'alumnos.carrera', 'alumnos.semestre')->join('alumnos', 'asistencias.no_de_control', '=', 'alumnos.no_de_control')->join('events','asistencias.event_id','=','events.id')->where('events.id', $idEvent)->get();
         return response()->json($alumnos,200);
     }
 

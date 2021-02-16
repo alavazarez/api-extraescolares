@@ -3,9 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes; //línea necesaria
 
 class Asistencia extends Model
 {
+    use SoftDeletes; //Implementamos
+    protected $dates = ['deleted_at']; //Registramos la nueva columna
+    
     public function events(){
         return $this->belongsTo('App\Models\Event','event_id','id');
     }

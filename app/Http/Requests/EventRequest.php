@@ -25,11 +25,13 @@ class EventRequest extends FormRequest
     {
         return [
             'nameEvent'       => 'required|max:55',
-            'description' => 'max:255',
             'type_event_id' => 'required|integer',
+            'description' => 'max:255',
             'date'        => 'required|date',
             'place'       => 'required|max:55',
             'organizer'   => 'max:50',
+            'status'      => 'required|integer'
+            
         ];
     }
 }

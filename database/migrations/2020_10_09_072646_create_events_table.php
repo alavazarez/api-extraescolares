@@ -21,6 +21,8 @@ class CreateEventsTable extends Migration
             $table->string('description');
             $table->dateTime('date');
             $table->string('place');
+            $table->integer('status');
+            $table->softDeletes(); //línea, para el borrado lógico
             $table->timestamps();
 
             $table->foreign('type_event_id')

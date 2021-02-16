@@ -3,9 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes; //línea necesaria
 
 class Event extends Model
 {
+    use SoftDeletes; //Implementamos
+    protected $dates = ['deleted_at']; //Registramos la nueva columna
+
     protected $table = 'events';
     
     protected $fillable = [
@@ -15,6 +19,7 @@ class Event extends Model
         'date',
         'place',
         'organizer',
+        'status'
     ];
 
     public function typeEvents()

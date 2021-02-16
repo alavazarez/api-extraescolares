@@ -17,6 +17,7 @@ class CreateAsistenciasTable extends Migration
             $table->id();
             $table->string('no_de_control');
             $table->unsignedBigInteger('event_id');
+            $table->softDeletes(); //línea, para el borrado lógico
             $table->timestamps();
 
             $table->foreign('event_id')

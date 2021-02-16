@@ -20,6 +20,7 @@ class CreateAcomsTable extends Migration
             $table->dateTime('dateDelivery')->nullable();
             $table->string('description');
             $table->integer('status');
+            $table->softDeletes(); //línea, para el borrado lógico
             $table->timestamps();
 
             $table->foreign('typeAcom_id')
