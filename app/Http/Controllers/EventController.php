@@ -203,8 +203,8 @@ class EventController extends Controller
     }
 
     public function getEventsAlumno($no_de_control)
-    {
-        $events = Event::select('events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description')->join('asistencias', 'events.id', '=', 'asistencias.event_id')->join('type_events', 'events.type_event_id', '=', 'type_events.id')->where('asistencias.no_de_control',$no_de_control)->get();
+    {   
+        $events = Event::select('events.id', 'events.nameEvent', 'type_events.type', 'events.organizer', 'events.date', 'events.place', 'events.description', 'events.status')->join('asistencias', 'events.id', '=', 'asistencias.event_id')->join('type_events', 'events.type_event_id', '=', 'type_events.id')->where('asistencias.no_de_control',$no_de_control)->where('asistencias.deleted_at', NULL)->get();
         return response()->json($events,200);
     }
 
